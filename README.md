@@ -6,6 +6,45 @@ According to some statistics published by CSD, there are approximately **70 mill
 
 With such a large demographic of people left in the dark, it seems imperative that a reliable translation system is set up. One that will aid in breaking the language barrier and allowing indiscriminate communication with all. The goal of this project is to detect and accurately translate the letters in American Sign Language (ASL). This can later be expanded to many different sign languages too.
 
+>   #### J & Z
+>
+>   J & Z are the only letters in ASL that require motion. As a consequence, I decided to skip these letters as these would be difficult to detect. Henceforth, any mention of ASL means all letters from A-Z excluding J & Z unless otherwise specified.
+
 ## Plan Of Work
 
 The project shall be implemented by using the power of machine learning. Using transfer learning on 3 well-known models, namely, MobileNet, ResNet, and Inception. These are convolutional neural networks which are used on images. The dataset used to train the model is a combination of multiple datasets comprising from online sources and self-created images. The goal is to translate the letters of ASL given as input through a webcam in real-time.
+
+## Get Started
+
+### Step 1: create_mapping.py
+
+Helps to create a json file with the required labels.
+
+```bash
+usage: create_mapping.py [-h] [--string STRING] [--output OUTPUT]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --string STRING, -s STRING
+                        Create a mapping of letters from a string (default: ABCDEFGHIKLMNOPQRSTUVWXY)
+  --output OUTPUT, -o OUTPUT
+                        Path to output json file (default: ../data/mapping.json)
+```
+
+Define a string of labels for the dataset or leave blank for ASL. Then, run the following
+
+```
+$ python create_mapping.py -s [LABELS] -o [OUTPUT FILE]
+```
+
+For example
+
+```python
+$ python create_mapping.py -s ABC -o mapping.json
+$ cat mapping.json
+{
+    "A": 0,
+    "B": 1,
+    "C": 2
+}
+```
