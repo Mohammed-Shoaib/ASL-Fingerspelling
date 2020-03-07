@@ -16,7 +16,7 @@ The project shall be implemented by using the power of machine learning. Using t
 
 ## Get Started
 
-### Step 1: create_mapping.py
+### Step 1: `create_mapping.py`
 
 Helps to create a json file with the required labels.
 
@@ -33,13 +33,13 @@ optional arguments:
 
 Define a string of labels for the dataset or leave blank for ASL. Then, run the following
 
-```
+```bash
 $ python create_mapping.py -s [LABELS] -o [OUTPUT FILE]
 ```
 
 For example
 
-```python
+```bash
 $ python create_mapping.py -s ABC -o mapping.json
 $ cat mapping.json
 {
@@ -48,3 +48,13 @@ $ cat mapping.json
     "C": 2
 }
 ```
+
+### Step 2: `config.py`
+
+Tune the model parameters based on your application. The following parameters can be tweaked:
+
+* `EPOCHS`: number of passes through the training set, _default = 64_
+* `SHAPE`: the shape of square image, _default = 250_
+* `CHANNELS`: number of color channels, _default = 3_
+* `BATCH_SIZE`: number of training samples used in one iteration, _default = 128_
+* `NUM_CLASSES`: number of categorical labels for classification, defined by `mapping` in [step 1](#step-1:-create_mapping.py)
