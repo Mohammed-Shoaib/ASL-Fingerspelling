@@ -1,9 +1,10 @@
 import os
 import sys
-import keras
 import argparse
+import numpy as np
 from utils import *
 from typing import Tuple
+from keras.utils import to_categorical
 
 
 
@@ -59,7 +60,7 @@ def preprocess_data(xs: np.ndarray, ys: np.ndarray) -> Tuple[np.ndarray, np.ndar
 	shuffle_in_unison(xs, ys)
 	
 	print('One-hot encoding the ys...')
-	ys = keras.utils.to_categorical(ys, NUM_CLASSES).astype(int)
+	ys = to_categorical(ys, NUM_CLASSES).astype(int)
 	
 	return xs, ys
 
@@ -91,7 +92,7 @@ def split_data(xs: np.ndarray, ys: np.ndarray, offset: float = 0.8) -> Tuple[Tup
 # add keyword arguments
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--data', '-d', help='Path to an input dataset folder', required=True)
-parser.add_argument('--output', '-o', help='Path to a directory to output serialized objects', required=True)
+parser.add_argument('--output', '-o', help='Path to a directory to output serialized dataset', required=True)
 parser.add_argument('--mapping', '-m', help='Path to input json mapping of letters', default='mapping.json')
 args = parser.parse_args()
 
@@ -103,8 +104,7 @@ if __name__ == '__main__':
 		sys.exit('The path to the dataset folder does not exist.')
 	elif not os.path.exists(args.mapping):
 		sys.exit('The path to the mapping does not exist.')
-	elif not os.path.exists(args.output):
-		os.makedirs(args.output)
+	os.makedirs(args.output, exist_ok=True)
 	
 	# get the data
 	xs, ys = load_data(args.data)
@@ -115,5 +115,5 @@ if __name__ == '__main__':
 	variables = ['xs', 'ys', 'train_xs', 'train_ys', 'test_xs', 'test_ys']
 	for v in variables:
 		print(f'Serializing the {v}...')
-		path = os.path.join(args.output, v)
+		path = os.path.join(args.output, f'{v}.ser')
 		serialize(locals()[v], path)

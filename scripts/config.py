@@ -1,5 +1,4 @@
 import json
-import tensorflow as tf
 
 
 
@@ -10,7 +9,3 @@ SHAPE = 250
 CHANNELS = 3
 BATCH_SIZE = 128
 NUM_CLASSES = len(mapping)
-
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-sess = tf.Session(config=config)
