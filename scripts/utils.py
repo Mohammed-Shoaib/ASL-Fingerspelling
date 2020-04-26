@@ -13,14 +13,17 @@ from keras.applications.inception_v3 import InceptionV3
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
 
 
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
 
-MODELS = ['mobilenetv2', 'inceptionv3', 'xception', 'inceptionresnetv2']
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
 T = TypeVar('T')
+MODELS = {
+	'xception': 'Xception',
+	'mobilenetv2': 'MobileNetV2',
+	'inceptionv3': 'InceptionV3',
+	'inceptionresnetv2': 'InceptionResNetV2'
+}
 
 
 
@@ -135,31 +138,11 @@ def load_learning_model(model: str) -> keras.Model:
 	Loads the transfer learning model with input shape [SHAPE✕SHAPE✕CHANNELS].
 	
 	Arguments:
-		model {str} -- One of the options available from MODELS
+		model {str} -- One of the options available from MODELS.keys()
 	
 	Returns:
 		keras.Model -- the transfer learning model
 	"""
-	model = globals()[f'load_{model}']()
+	model = globals()[f'{MODELS[model]}'](include_top=False, weights='imagenet', input_shape=(SHAPE, SHAPE, CHANNELS), classes=NUM_CLASSES)
 	layer = model.layers[-1]
 	return keras.Model(inputs=model.inputs, outputs=layer.output)
-
-
-
-def load_mobilenetv2() -> keras.Model:
-	return MobileNetV2(include_top=False, weights='imagenet', input_shape=(SHAPE, SHAPE, CHANNELS), alpha=1.0, classes=NUM_CLASSES)
-
-
-
-def load_xception() -> keras.Model:
-	return Xception(include_top=False, weights='imagenet', input_shape=(SHAPE, SHAPE, CHANNELS), classes=NUM_CLASSES)
-
-
-
-def load_inceptionv3() -> keras.Model:
-	return InceptionV3(include_top=False, weights='imagenet', input_shape=(SHAPE, SHAPE, CHANNELS), classes=NUM_CLASSES)
-
-
-
-def load_inceptionresnetv2() -> keras.Model:
-	return InceptionResNetV2(include_top=False, weights='imagenet', input_shape=(SHAPE, SHAPE, CHANNELS), classes=NUM_CLASSES)

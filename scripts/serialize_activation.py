@@ -37,7 +37,7 @@ parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFo
 parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
 parser.add_argument('--output', '-o', help='Path to a directory to output serialized model activations', required=True)
 parser.add_argument('--chunk-size', '-c', help='Number of images to chunk', type=int, default=10**4)
-parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS, type=str.lower, default=MODELS[0])
+parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS.keys(), type=str.lower, required=True)
 args = parser.parse_args()
 
 
@@ -62,12 +62,12 @@ if __name__ == '__main__':
 		# get model activations for train_xs
 		end = min(start + args.chunk_size, len(train_xs))
 		train_activations = get_activations(train_xs, start, end)
-		
+
 		# get model activations for test_xs
 		end = min(start + args.chunk_size, len(test_xs))
 		test_activations = get_activations(test_xs, start, end)
-
-		print(f'Serializing chunk {i + 1} out of {len(chunks)}...')
+		
+		print(f'Serializing chunk {i + 1} out of {chunks}...')
 		variables = ['train_activations', 'test_activations']
 		for v in variables:
 			# create the directory if it does not exist
