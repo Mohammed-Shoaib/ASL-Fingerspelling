@@ -53,10 +53,31 @@ def read_image(path: str) -> np.ndarray:
 		np.ndarray -- an array of image pixels
 	"""
 	img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
-	# ! conversion to color is permanent, # channels always 3
-	if len(img.shape) != 3:
-		img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 	return np.asarray(img)
+
+
+
+def save_image(img: np.ndarray, path: str) -> None:
+	"""
+	Saves an image to the given path.
+
+	Arguments:
+		img {np.ndarray} -- an array of image pixels
+		path {str} -- the path of the image to be saved
+	"""
+	cv2.imwrite(path, img)
+
+
+
+def show_image(img: np.ndarray) -> None:
+	"""
+	Display the image on the screen.
+	
+	Arguments:
+		img {np.ndarray} -- an array of image pixels
+	"""
+	cv2.imshow('Image', img)
+	cv2.waitKey()
 
 
 

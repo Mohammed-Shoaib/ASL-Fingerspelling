@@ -89,16 +89,14 @@ def split_data(xs: np.ndarray, ys: np.ndarray, offset: float = 0.8) -> Tuple[Tup
 
 
 
-# add keyword arguments
-parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('--data', '-d', help='Path to an input dataset folder', required=True)
-parser.add_argument('--output', '-o', help='Path to a directory to output serialized dataset', required=True)
-parser.add_argument('--mapping', '-m', help='Path to input json mapping of letters', default='mapping.json')
-args = parser.parse_args()
-
-
-
 if __name__ == '__main__':
+	# add keyword arguments
+	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+	parser.add_argument('--data', '-d', help='Path to an input dataset folder', required=True)
+	parser.add_argument('--output', '-o', help='Path to a directory to output serialized dataset', required=True)
+	parser.add_argument('--mapping', '-m', help='Path to input json mapping of letters', default='mapping.json')
+	args = parser.parse_args()
+	
 	# error handling
 	if not os.path.exists(args.data):
 		sys.exit('The path to the dataset folder does not exist.')

@@ -58,9 +58,13 @@ $ pip install --user numpy keras kaggle tensorflow
 
 It is recommended to specify the `--user` flag to pip. This installs packages for the local user and does not write to system directories. Preferably, do not use `sudo pip` as this can cause problems.
 
-## Get Started
+## Steps
 
-We will now go from the raw dataset to a fully-trained model! The execution for each of the following steps will take sometime so please be patient and let it run for a while.
+We will now go from the raw dataset to a fully-trained model!
+
+> **Note:**
+>
+> The execution for each of the following steps will take sometime so please be patient and let it run for a while.
 
 ### Step 0: `extract.sh`
 
@@ -149,4 +153,32 @@ For example,
 
 ```bash
 $ python serialize_activation.py -d ../ser -o ../models
+```
+
+### Step 5: `train.py`
+
+The moment that we have been waiting for has finally come! Let the training begin. Run the following command
+
+```bash
+$ python train.py -d [PATH TO SERIALIZED DATASET] -a [PATH TO SERIALIZED ACTIVATIONS] -lm [TRANSFER LEARNING MODEL] -m [PATH TO CREATE/UPDATE MODEL] -s [START INDEX OF DATASET] -e [END INDEX OF DATASET]
+```
+
+For example,
+
+```bash
+$ python train.py -d ../ser -a ../models/mobilenetv2 -lm mobilenetv2 -m ../models/mobilenetv2/model.h5 -s 0 -e 80000
+```
+
+### Step 6: `predict.py`
+
+Now that the training has been completed, it's time to test the performance of our model. Run the following command
+
+```bash
+$ python predict.py -d [PATH TO SERIALIZED DATASET] -lm [TRANSFER LEARNING MODEL] -m [PATH TO TRAINED MODEL] -s [NUMBER OF SAMPLES TO TEST] [-l [LIVE DEMO PREDICTION]]
+```
+
+For example,
+
+```bash
+$ python predict.py -d ../ser -lm mobilenetv2 -m ../models/mobilenetv2/model.h5 -s 10 -l
 ```

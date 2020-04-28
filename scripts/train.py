@@ -153,7 +153,7 @@ def create_model() -> Sequential:
 					kernel_initializer='VarianceScaling'))
 
 	# compiling the model
-	adam = keras.optimizers.Adam(lr=0.001)
+	adam = keras.optimizers.Adam(lr=0.0001)
 	model.compile(optimizer=adam,
 				  loss='categorical_crossentropy',
 				  metrics=['accuracy'])
@@ -162,15 +162,15 @@ def create_model() -> Sequential:
 
 
 
-def train(train_xs: np.array, train_ys: np.array, test_xs: np.array, test_ys: np.array) -> None:
+def train(train_xs: np.ndarray, train_ys: np.ndarray, test_xs: np.ndarray, test_ys: np.ndarray) -> None:
 	"""
 	Trains the model with the validation data.
 
 	Arguments:
-		train_xs {np.array} -- an array containing the pixel values for each image in training data
-		train_ys {np.array} -- the label for each image in training data
-		test_xs {np.array} -- an array containing the pixel values for each image in test data
-		test_ys {np.array} -- the label for each image in test data
+		train_xs {np.ndarray} -- an array containing the pixel values for each image in training data
+		train_ys {np.ndarray} -- the label for each image in training data
+		test_xs {np.ndarray} -- an array containing the pixel values for each image in test data
+		test_ys {np.ndarray} -- the label for each image in test data
 	"""
 	print('Training the model...')
 	model.fit(train_xs, train_ys,
@@ -183,13 +183,13 @@ def train(train_xs: np.array, train_ys: np.array, test_xs: np.array, test_ys: np
 
 
 
-def evaluate(test_xs: np.array, test_ys: np.array) -> None:
+def evaluate(test_xs: np.ndarray, test_ys: np.ndarray) -> None:
 	"""
 	Evaluates the performance of the model on the test dataset.
 	
 	Arguments:
-		test_xs {np.array} -- an array containing the pixel values for each image in test data
-		test_ys {np.array} -- the label for each image in test data
+		test_xs {np.ndarray} -- an array containing the pixel values for each image in test data
+		test_ys {np.ndarray} -- the label for each image in test data
 	"""
 	score = model.evaluate(test_xs, test_ys, verbose=0)
 	print('Test Loss:', score[0])
@@ -197,20 +197,18 @@ def evaluate(test_xs: np.array, test_ys: np.array) -> None:
 
 
 
-# adding the keyword arguments
-parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
-parser.add_argument('--activation', '-a', help='Path to an input serialized activations folder', required=True)
-parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS.keys(), required=True)
-parser.add_argument('--model', '-m', help='Path to a directory to create/update model', required=True)
-parser.add_argument('--chunk-size', '-c', help='Number of images in a single serialized activation', type=int, default=10**4)
-parser.add_argument('--start', '-s', help='Start index of dataset to train, start-index = index * chunk-size', type=int, required=True)
-parser.add_argument('--end', '-e', help='End index of dataset to train, end-index = index * chunk-size', type=int, required=True)
-args = parser.parse_args()
-
-
-
 if __name__ == '__main__':
+	# adding the keyword arguments
+	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+	parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
+	parser.add_argument('--activation', '-a', help='Path to an input serialized activations folder', required=True)
+	parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS.keys(), required=True)
+	parser.add_argument('--model', '-m', help='Path to a directory to create/update model', required=True)
+	parser.add_argument('--chunk-size', '-c', help='Number of images in a single serialized activation', type=int, default=10**4)
+	parser.add_argument('--start', '-s', help='Start index of dataset to train, start-index = index * chunk-size', type=int, required=True)
+	parser.add_argument('--end', '-e', help='End index of dataset to train, end-index = index * chunk-size', type=int, required=True)
+	args = parser.parse_args()
+
 	# error handling
 	if not os.path.exists(args.data):
 		sys.exit('The path given to the serialized dataset does not exist.')
@@ -238,7 +236,7 @@ if __name__ == '__main__':
 	print('Loading the serialized activations...')
 	train_activations = deserialize_activation(args.activation, 'train_activations.ser')
 	test_activations = deserialize_activation(args.activation, 'test_activations.ser')
-	
+
 	print('Shapes of parameters:')
 	print('Train activations: ', train_activations.shape)
 	print('Test activations: ', test_activations.shape)

@@ -21,7 +21,7 @@ def get_activations(xs: np.ndarray, start: int, end: int) -> np.ndarray:
 	"""
 	activations = []
 	
-	for i, img in enumerate(xs[start:end]):
+	for i, img in enumerate(xs[start : end]):
 		img = np.expand_dims(img, axis=0)
 		activation = learning_model.predict(img)
 		activation = np.squeeze(activation, axis=0)
@@ -32,17 +32,15 @@ def get_activations(xs: np.ndarray, start: int, end: int) -> np.ndarray:
 
 
 
-# adding the keyword arguments
-parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
-parser.add_argument('--output', '-o', help='Path to a directory to output serialized model activations', required=True)
-parser.add_argument('--chunk-size', '-c', help='Number of images to chunk', type=int, default=10**4)
-parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS.keys(), type=str.lower, required=True)
-args = parser.parse_args()
-
-
-
 if __name__ == '__main__':
+	# adding the keyword arguments
+	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+	parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
+	parser.add_argument('--output', '-o', help='Path to a directory to output serialized model activations', required=True)
+	parser.add_argument('--chunk-size', '-c', help='Number of images to chunk', type=int, default=10**4)
+	parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS.keys(), type=str.lower, required=True)
+	args = parser.parse_args()
+
 	# error handling
 	if not os.path.exists(args.data):
 		sys.exit('The path given to the serialized dataset does not exist.')
@@ -55,7 +53,7 @@ if __name__ == '__main__':
 	test_xs = deserialize(os.path.join(args.data, 'test_xs.ser'))
 	
 	# chunk model activations
-	chunks = ceil(len(train_xs)/args.chunk_size)
+	chunks = ceil(len(train_xs) / args.chunk_size)
 	for i in range(chunks):
 		start = i * args.chunk_size
 
