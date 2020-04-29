@@ -198,7 +198,7 @@ def evaluate(test_xs: np.ndarray, test_ys: np.ndarray) -> None:
 
 
 if __name__ == '__main__':
-	# adding the keyword arguments
+	# add keyword arguments
 	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 	parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
 	parser.add_argument('--activation', '-a', help='Path to an input serialized activations folder', required=True)

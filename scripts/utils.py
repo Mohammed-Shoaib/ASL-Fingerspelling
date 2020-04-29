@@ -1,3 +1,4 @@
+import os
 import cv2
 import json
 import keras
@@ -151,6 +152,48 @@ def shuffle_in_unison(a: np.ndarray, b: np.ndarray) -> None:
 	np.random.shuffle(a)
 	np.random.set_state(rng_state)
 	np.random.shuffle(b)
+
+
+
+def last_count(path: str) -> int:
+	"""
+	Computes the last count of the data in the path having format '[label]_[count].png'.
+	
+	Arguments:
+		path {str} -- path to a directory containing the data
+	
+	Returns:
+		int -- last count in the path
+	"""
+	files = os.listdir(path)
+	if not files:
+		return 0
+	files = [int(f.split('_')[-1].split('.')[0]) for f in files if f.endswith('.png')]
+	return sorted(files)[-1]
+
+
+
+def region_of_interest(img: np.ndarray) -> np.ndarray:
+	"""
+	Given an image, computes the region of interest.
+
+	Arguments:
+		img {np.ndarray} -- an array of image pixels
+
+	Returns:
+		np.ndarray -- region of interest (roi)
+	"""
+	offset = 125
+	height = img.shape[0]
+	
+	# compute the coordinates of roi
+	x1, x2 = 150 - offset, 150 + offset
+	y1, y2 = height // 2 - offset, height // 2 + offset
+	
+	# draw a blue bounding box on the image
+	cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
+	
+	return img[y1:y2, x1:x2]
 
 
 

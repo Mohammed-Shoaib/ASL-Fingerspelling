@@ -33,7 +33,7 @@ def get_activations(xs: np.ndarray, start: int, end: int) -> np.ndarray:
 
 
 if __name__ == '__main__':
-	# adding the keyword arguments
+	# add keyword arguments
 	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 	parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
 	parser.add_argument('--output', '-o', help='Path to a directory to output serialized model activations', required=True)

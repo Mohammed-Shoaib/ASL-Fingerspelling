@@ -89,14 +89,8 @@ def predict_live(device:int = 0):
 		# capture frame-by-frame
 		_, frame = capture.read()
 		frame = cv2.flip(frame, 1)
-
-		# get region of interest (roi)
-		offset = 125
-		height, width, _ = frame.shape
-		x1, x2 = 150 - offset, 150 + offset
-		y1, y2 = height // 2 - offset, height // 2 + offset
-		roi = frame[y1:y2, x1:x2]
-		cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
+		roi = region_of_interest(frame)
+		height = frame.shape[0]
 
 		# rolling average predictions
 		output = predict(roi).argmax()
@@ -125,7 +119,7 @@ def predict_live(device:int = 0):
 
 
 if __name__ == '__main__':
-	# adding the keyword arguments
+	# add keyword arguments
 	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 	parser.add_argument('--data', '-d', help='Path to an input serialized dataset folder', required=True)
 	parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS.keys(), required=True)

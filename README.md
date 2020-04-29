@@ -97,6 +97,20 @@ $ cat mapping.json
 }
 ```
 
+### Step 2: `generate_data.py`
+
+This step is only required if you would like to create your own dataset. You can run the following,
+
+```bash
+$ python generate_data.py -d [PATH TO OUTPUT DATA] -l [LABEL]
+```
+
+The images will be saved in numeric order in the specified output directory with the label. For example,
+
+```bash
+$ python generate_data.py -d ../data -l A
+```
+
 ### Step 2: `config.py`
 
 Tune the model parameters based on your application. The following parameters can be tweaked:
