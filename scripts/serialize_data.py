@@ -39,7 +39,7 @@ def load_data(path: str) -> Tuple[np.ndarray, np.ndarray]:
 
 def preprocess_data(xs: np.ndarray, ys: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
 	"""
-	1. Resizes each image to a shape [SHAPE✕SHAPE✕CHANNELS] with padding to keep the aspect ratio.
+	1. Resizes each image to a shape [SHAPE×SHAPE×CHANNELS] with padding to keep the aspect ratio.
 	2. Shuffles the xs & ys together.
 	3. One-hot encodes the labels or ys.
 	
@@ -50,7 +50,7 @@ def preprocess_data(xs: np.ndarray, ys: np.ndarray) -> Tuple[np.ndarray, np.ndar
 	Returns:
 		Tuple[np.ndarray, np.ndarray] -- tuple of two items (images or xs, labels or ys)
 	"""
-	print(f'Resizing the xs to a shape of [{SHAPE}✕{SHAPE}✕{CHANNELS}]...')
+	print(f'Resizing the xs to a shape of [{SHAPE}×{SHAPE}×{CHANNELS}]...')
 	for i, img in enumerate(xs):
 		xs[i] = resize_image(img)
 	

@@ -1,4 +1,5 @@
 import os
+import sys
 import cv2
 import json
 import keras
@@ -113,14 +114,20 @@ def deserialize(path: str) -> T:
 
 def resize_image(img: np.ndarray) -> np.ndarray:
 	"""
-	Resizes an image in (width, height, channels) format with padding to keep the aspect ratio.
+	Resizes an image to shape [SHAPE×SHAPE×CHANNELS] format with padding to keep the aspect ratio.
 	
 	Arguments:
 		img {np.ndarray} -- an array of image pixels
 	
 	Returns:
-		np.ndarray -- resized image of shape [SHAPE✕SHAPE✕CHANNELS]
+		np.ndarray -- resized image of shape [SHAPE×SHAPE×CHANNELS]
 	"""
+	# convert grayscale to rgb
+	if len(img.shape) == 2:
+		img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+	elif len(image.shape) != 3:
+		sys.exit(f'Expected image format to be of Grayscale or Color, found image with shape {img.shape} instead.')
+	
 	# resize the image
 	old_shape = img.shape[1::-1]
 	ratio = SHAPE / max(old_shape)
@@ -199,7 +206,7 @@ def region_of_interest(img: np.ndarray) -> np.ndarray:
 
 def load_learning_model(model: str) -> keras.Model:
 	"""
-	Loads the transfer learning model with input shape [SHAPE✕SHAPE✕CHANNELS].
+	Loads the transfer learning model with input shape [SHAPE×SHAPE×CHANNELS].
 	
 	Arguments:
 		model {str} -- One of the options available from MODELS.keys()

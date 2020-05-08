@@ -6,12 +6,14 @@ import numpy as np
 
 from utils import *
 from config import *
+from time import time
 from pathlib import Path
 from keras.models import load_model
 from keras.models import Sequential
 from keras.layers import Flatten, Dense
 from keras.layers import Conv2D, DepthwiseConv2D
 from keras.layers import UpSampling2D, MaxPooling2D
+from tensorflow.python.keras.callbacks import TensorBoard
 
 
 
@@ -26,8 +28,8 @@ def deserialize_activation(path: str, name: str) -> np.ndarray:
 	Returns:
 		np.ndarray -- a single ndarray created by merging the deserialized activations
 	"""
-	# sort by index
-	dirs = sorted(os.listdir(path), key = lambda x: int(x.split('_')[-1]))
+	# get the directories and sort them by index
+	dirs = sorted(next(os.walk(path))[1], key = lambda x: int(x.split('_')[-1]))
 	if name != 'test_activations.ser':
 		dirs = dirs[args.start // args.chunk_size : args.end // args.chunk_size]
 	
@@ -148,10 +150,6 @@ def create_model() -> Sequential:
 					activation='softmax',
 					kernel_initializer='VarianceScaling'))
 
-	model.add(Dense(units=24,
-					activation='softmax',
-					kernel_initializer='VarianceScaling'))
-
 	# compiling the model
 	adam = keras.optimizers.Adam(lr=0.0001)
 	model.compile(optimizer=adam,
@@ -172,13 +170,17 @@ def train(train_xs: np.ndarray, train_ys: np.ndarray, test_xs: np.ndarray, test_
 		test_xs {np.ndarray} -- an array containing the pixel values for each image in test data
 		test_ys {np.ndarray} -- the label for each image in test data
 	"""
+	# user TensorBoard to visualize training
+	tensorboard = TensorBoard(log_dir=os.path.join(args.log_dir, time()))
+
 	print('Training the model...')
 	model.fit(train_xs, train_ys,
 			  batch_size=BATCH_SIZE,
 			  validation_data=(test_xs, test_ys),
 			  epochs=EPOCHS,
 			  shuffle=True,
-			  verbose=1)
+			  verbose=1,
+			  callback=[tensorboard])
 	print('Finished training the model.')
 
 
@@ -204,6 +206,7 @@ if __name__ == '__main__':
 	parser.add_argument('--activation', '-a', help='Path to an input serialized activations folder', required=True)
 	parser.add_argument('--learning-model', '-lm', help='Transfer learning model used to generate the activations', choices=MODELS.keys(), required=True)
 	parser.add_argument('--model', '-m', help='Path to a directory to create/update model', required=True)
+	parser.add_argument('--log-dir', '-l', help='Path to a directory to log training', required=True)
 	parser.add_argument('--chunk-size', '-c', help='Number of images in a single serialized activation', type=int, default=10**4)
 	parser.add_argument('--start', '-s', help='Start index of dataset to train, start-index = index * chunk-size', type=int, required=True)
 	parser.add_argument('--end', '-e', help='End index of dataset to train, end-index = index * chunk-size', type=int, required=True)
@@ -214,6 +217,7 @@ if __name__ == '__main__':
 		sys.exit('The path given to the serialized dataset does not exist.')
 	elif not os.path.exists(args.activation):
 		sys.exit('The path given to the serialized activations does not exist.')
+	os.makedirs(args.log_dir, exist_ok=True)
 	
 	# create model if it doesn't exist
 	learning_model = load_learning_model(args.learning_model)
