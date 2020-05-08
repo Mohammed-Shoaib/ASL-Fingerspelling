@@ -6,6 +6,11 @@ According to some statistics published by CSD, there are approximately **70 mill
 
 With such a large demographic of people left in the dark, it seems imperative that a reliable translation system is set up. One that will aid in breaking the language barrier and allowing indiscriminate communication with all. The goal of this project is to detect and accurately translate the letters in American Sign Language (ASL). This can later be expanded to many different sign languages too.
 
+<figure align="center">
+    <img src='results/alphabets.jpg' alt='Fingerselling ASL' width="400"/>
+    <figcaption>Alphabets in American Sign Language (ASL)</figcaption>
+</figure>
+
 >   #### J & Z
 >
 >   J & Z are the only letters in ASL that require motion. As a consequence, I decided to skip these letters as these would be difficult to detect. Henceforth, any mention of ASL means all letters from A-Z excluding J & Z unless otherwise specified.
@@ -13,6 +18,36 @@ With such a large demographic of people left in the dark, it seems imperative th
 ## Plan Of Work
 
 The project shall be implemented by using the power of machine learning. Using transfer learning on 3 well-known models, namely, MobileNet, ResNet, and Inception. These are convolutional neural networks which are used on images. The dataset used to train the model is a combination of multiple datasets comprising from online sources and self-created images. The goal is to translate the letters of ASL given as input through a webcam in real-time.
+
+## Results
+
+<figure align="center">
+    <img src='results/fingerspelling.gif' alt='Fingerselling ASL' width="400"/>
+    <figcaption>Real-time fingerspelling detection of ASL</figcaption>
+</figure>
+
+#### Transfer Learning Model
+
+| Model                 | Size      | Accuracy  | Parameters |
+|-----------------------|:---------:|:---------:|:----------:|
+| MobileNetV2           | 14 MB     | 0.713     | 3,538,984  |
+| Inceptionv3           | 92 MB     | 0.779     | 23,851,784 |
+| Xception              | 88 MB     | 0.790     | 22,910,480 |
+| Inception-ResNetv2    | 215 MB    | 0.803     | 55,873,736 |
+
+#### Trained Model
+
+| Model                 | Size      | Accuracy  | Parameters    |
+|-----------------------|:---------:|:---------:|:-------------:|
+| MobileNetV2           | 91 MB     | 0.91833   | 7,934,872     |
+| Inceptionv3           | 99 MB     | 0.92359   | 8,598,424     |
+| Xception              | 100 MB    | 0.90828   | 8,721,304     |
+| Inception-ResNetv2    | 93 MB     | 0.84838   | 8,074,136     |
+
+<figure align="center">
+    <img src='results/hello.gif' alt='Hello in ASL' width="400"/>
+    <figcaption>Detection of "HELLO" in ASL</figcaption>
+</figure>
 
 ## Installation
 
@@ -32,7 +67,7 @@ You will require the following dependencies:
 * [Numpy](https://www.scipy.org/install.html)
 * [Keras](https://keras.io/#installation)
 * [Kaggle API](https://github.com/Kaggle/kaggle-api)
-* [Tensorflow](https://www.tensorflow.org/install)
+* [TensorFlow](https://www.tensorflow.org/install)
 
 Download [pip](https://pip.pypa.io/en/stable/installing/) if you haven't already
 
@@ -111,17 +146,16 @@ The images will be saved in numeric order in the specified output directory with
 $ python generate_data.py -d ../data -l A
 ```
 
-### Step 2: `config.py`
+### Step 3: `config.py`
 
 Tune the model parameters based on your application. The following parameters can be tweaked:
 
-*   `EPOCHS`: number of passes through the training set, _default = 64_
-*   `SHAPE`: the shape of square image, _default = 250_
-*   `CHANNELS`: number of color channels, _default = 3_
-*   `BATCH_SIZE`: number of training samples used in one iteration, _default = 128_
-*   `NUM_CLASSES`: number of categorical labels for classification, defined by `mapping` in [step 1](#step-1:-create_mapping.py)
+*   `EPOCHS` — number of passes through the training set, _default = 64_
+*   `SHAPE` — the shape of square image, _default = 250_
+*   `CHANNELS` — number of color channels, _default = 3_
+*   `BATCH_SIZE` — number of training samples used in one iteration, _default = 128_
 
-### Step 3: `serialize_data.py`
+### Step 4: `serialize_data.py`
 
 From [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/serialization/):
 
@@ -139,7 +173,7 @@ For example,
 $ python serialize_data.py -d ../data -o ../ser
 ```
 
-### Step 4: `serialize_activation.py`
+### Step 5: `serialize_activation.py`
 
 We have used transfer learning to get a foundation for the model configuration. On top of this, we will use additional layers that our model will be trained upon.
 
@@ -153,9 +187,9 @@ Keras has many available models to choose from available in [`keras.applications
 *   MobileNetV2
 *   Inceptionv3
 *   Xception
-*   InceptionResNetV2
+*   Inception-ResNetv2
 
-These were carefully chosen due to their ability to perform well on images and computer vision tasks.
+These were chosen carefully due to their ability to perform well on images and computer vision related tasks.
 
 We will now use the dataset and get the transfer learning model activations. Similar to before we will then serialize the model activations as this will significantly decrease the training time. Choose your transfer learning model, then, run the following
 
@@ -169,21 +203,21 @@ For example,
 $ python serialize_activation.py -d ../ser -o ../models
 ```
 
-### Step 5: `train.py`
+### Step 6: `train.py`
 
 The moment that we have been waiting for has finally come! Let the training begin. Run the following command
 
 ```bash
-$ python train.py -d [PATH TO SERIALIZED DATASET] -a [PATH TO SERIALIZED ACTIVATIONS] -lm [TRANSFER LEARNING MODEL] -m [PATH TO CREATE/UPDATE MODEL] -s [START INDEX OF DATASET] -e [END INDEX OF DATASET]
+$ python train.py -d [PATH TO SERIALIZED DATASET] -a [PATH TO SERIALIZED ACTIVATIONS] -lm [TRANSFER LEARNING MODEL] -m [PATH TO CREATE/UPDATE MODEL] -l [PATH TO LOG DIRECTORY] -s [START INDEX OF DATASET] -e [END INDEX OF DATASET]
 ```
 
 For example,
 
 ```bash
-$ python train.py -d ../ser -a ../models/mobilenetv2 -lm mobilenetv2 -m ../models/mobilenetv2/model.h5 -s 0 -e 80000
+$ python train.py -d ../ser -a ../models/mobilenetv2 -lm mobilenetv2 -m ../models/mobilenetv2/model.h5 -l ../models/mobilenetv2/logs -s 0 -e 80000
 ```
 
-### Step 6: `predict.py`
+### Step 7: `predict.py`
 
 Now that the training has been completed, it's time to test the performance of our model. Run the following command
 
