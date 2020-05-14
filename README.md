@@ -1,4 +1,4 @@
-# American Sign Language (ASL) Fingerspelling
+# American Sign Language (ASL) Fingerspelling Detection
 
 ## Background
 
@@ -6,10 +6,11 @@ According to some statistics published by CSD, there are approximately **70 mill
 
 With such a large demographic of people left in the dark, it seems imperative that a reliable translation system is set up. One that will aid in breaking the language barrier and allowing indiscriminate communication with all. The goal of this project is to detect and accurately translate the letters in American Sign Language (ASL). This can later be expanded to many different sign languages too.
 
-<figure align="center">
-    <img src='results/alphabets.jpg' alt='Fingerselling ASL' width="400"/>
-    <figcaption>Alphabets in American Sign Language (ASL)</figcaption>
-</figure>
+<p align="center">
+  <img src='results/alphabets.jpg' alt='Fingerselling ASL' width="500"/>
+  <br>
+  <span>Alphabets in American Sign Language (ASL)</span>
+</p>
 
 >   #### J & Z
 >
@@ -21,18 +22,19 @@ The project shall be implemented by using the power of machine learning. Using t
 
 ## Results
 
-<figure align="center">
-    <img src='results/fingerspelling.gif' alt='Fingerselling ASL' width="400"/>
-    <figcaption>Real-time fingerspelling detection of ASL</figcaption>
-</figure>
+<p align="center">
+  <img src='results/fingerspelling.gif' alt='Fingerselling ASL' height="400"/>
+  <br>
+  <span>Real-time fingerspelling detection of ASL</span>
+</p>
 
 #### Transfer Learning Model
 
 | Model                 | Size      | Accuracy  | Parameters |
 |-----------------------|:---------:|:---------:|:----------:|
 | MobileNetV2           | 14 MB     | 0.713     | 3,538,984  |
-| Inceptionv3           | 92 MB     | 0.779     | 23,851,784 |
 | Xception              | 88 MB     | 0.790     | 22,910,480 |
+| Inceptionv3           | 92 MB     | 0.779     | 23,851,784 |
 | Inception-ResNetv2    | 215 MB    | 0.803     | 55,873,736 |
 
 #### Trained Model
@@ -40,14 +42,9 @@ The project shall be implemented by using the power of machine learning. Using t
 | Model                 | Size      | Accuracy  | Parameters    |
 |-----------------------|:---------:|:---------:|:-------------:|
 | MobileNetV2           | 91 MB     | 0.91833   | 7,934,872     |
-| Inceptionv3           | 99 MB     | 0.92359   | 8,598,424     |
 | Xception              | 100 MB    | 0.90828   | 8,721,304     |
+| Inceptionv3           | 99 MB     | 0.92359   | 8,598,424     |
 | Inception-ResNetv2    | 93 MB     | 0.84838   | 8,074,136     |
-
-<figure align="center">
-    <img src='results/hello.gif' alt='Hello in ASL' width="400"/>
-    <figcaption>Detection of "HELLO" in ASL</figcaption>
-</figure>
 
 ## Installation
 
@@ -185,8 +182,8 @@ We have used transfer learning to get a foundation for the model configuration. 
 Keras has many available models to choose from available in [`keras.applications`](https://keras.io/applications/). I have made available the following:
 
 *   MobileNetV2
-*   Inceptionv3
 *   Xception
+*   Inceptionv3
 *   Inception-ResNetv2
 
 These were chosen carefully due to their ability to perform well on images and computer vision related tasks.
@@ -230,3 +227,13 @@ For example,
 ```bash
 $ python predict.py -d ../ser -lm mobilenetv2 -m ../models/mobilenetv2/model.h5 -s 10 -l
 ```
+
+## Credits
+
+I would like to express my sincere gratitude to the people who helped me along this project:
+
+*   Dr. Santhosh Kumar Vasudevan — for being my mentor and guiding me throughout the period of my project
+*   [Dhruv Anant Duseja](http://linkedin.com/in/dhruv-duseja) — for giving me exceptional ideas, doing the research, and also contributing in the creation of the dataset
+*   [Sadia Fatima](https://www.linkedin.com/in/sadiyafatima95/) — for contributing in the creation of the dataset
+*   [Shaun Fernandes](http://linkedin.com/in/fernandes-shaun) — for giving me great advice, sorting out technical difficulties, and also contributing in the creation of the dataset
+*   [Sumaiya Fatima](https://www.linkedin.com/in/sumaiya-fatima/) — for contributing in the creation of the dataset
