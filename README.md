@@ -234,6 +234,6 @@ I would like to express my sincere gratitude to the people who helped me along t
 
 *   Dr. Santhosh Kumar Vasudevan — for being my mentor and guiding me throughout the period of my project
 *   [Dhruv Anant Duseja](http://linkedin.com/in/dhruv-duseja) — for giving me exceptional ideas, doing the research, and also contributing in the creation of the dataset
-*   [Sadia Fatima](https://www.linkedin.com/in/sadiyafatima95/) — for contributing in the creation of the dataset
+*   [Sadia Fatima](https://www.linkedin.com/in/sadiyafatima95/) — for providing me moral support and contributing in the creation of the dataset
 *   [Shaun Fernandes](http://linkedin.com/in/fernandes-shaun) — for giving me great advice, sorting out technical difficulties, and also contributing in the creation of the dataset
-*   [Sumaiya Fatima](https://www.linkedin.com/in/sumaiya-fatima/) — for contributing in the creation of the dataset
+*   [Sumaiya Fatima](https://www.linkedin.com/in/sumaiya-fatima/) — for designing many of the assets and contributing in the creation of the dataset
