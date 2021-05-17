@@ -2,6 +2,27 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
+\usepackage[acronym,nomain,nonumberlist]{glossaries}
+\makeglossaries
+
+% list of abbreviations:
+\newacronym{adc}{ADC}{Analog-to-Digital Converter}
+\newacronym{ann}{ANN}{Artificial Neural Network}
+\newacronym{asd}{ASD}{American School for the Deaf}
+\newacronym{asl}{ASL}{American Sign Language}
+\newacronym{bsl}{BSL}{British Sign Language}
+\newacronym{csd}{CSD}{Communication Service for the Deaf}
+\newacronym{csi}{CSI}{Channel State Information}
+\newacronym{cnn}{CNN}{Convolutional Neural Network}
+\newacronym{fsl}{FSL}{French Sign Language}
+\newacronym{icicis}{ICICIS}{International Conference on Intelligent Computing and Information Systems}
+\newacronym{icme}{ICME}{International Conference on Multimedia and Expo}
+\newacronym{lcd}{LCD}{Liquid Crystal Display}
+\newacronym{nidcd}{NIDCD}{National Institute on Deafness and Other Communication Disorders}
+\newacronym{rg}{RF}{Random Forest}
+\newacronym{rgb}{RGB}{Red, Green, and Blue}
+\newacronym{sota}{SOTA}{State-of-the-art}
+\newacronym{who}{WHO}{World Health Organization}
 
 \title{American Sign Language\\
 	(ASL)\\
@@ -78,5 +99,8 @@ close to 1,000,000 were classified as functionally deaf.
 
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
+
+\glsaddall
+\printglossary[type=\acronymtype,title=List Of Abbreviations]
 
 \end{document}
