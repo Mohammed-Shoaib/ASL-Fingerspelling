@@ -1,11 +1,17 @@
 \documentclass[twocolumn]{article}
 \usepackage{url}
+\usepackage{titling}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[acronym,nomain,nonumberlist,nogroupskip,nopostdot]{glossaries}
 
+% loads the list of abbreviations
 \makeglossaries
 \loadglsentries{acronym}
+
+% centers the title page
+\renewcommand\maketitlehookd{\vfill\null}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
 
 \title{\gls{asl}\\
 	Fingerspelling Detection}
@@ -15,10 +21,9 @@
 
 \begin{document}
 
-\begin{titlepage}
+\begin{titlingpage}
 \maketitle
-\thispagestyle{empty}
-\end{titlepage}
+\end{titlingpage}
 
 \begin{abstract}
 Approximately 70 million people around the world are deaf-mute. While 
