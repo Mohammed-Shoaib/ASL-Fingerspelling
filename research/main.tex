@@ -13,6 +13,14 @@
 \renewcommand\maketitlehookd{\vfill\null}
 \renewcommand\maketitlehooka{\null\mbox{}\vfill}
 
+% keywords command
+\providecommand{\keywords}[1]
+{
+  \small
+  \noindent \textbf{\textit{Keywords ---}} #1
+}
+
+
 \title{\gls{asl}\\
 	Fingerspelling Detection}
 \author{Shoaib Mohammed}
@@ -31,6 +39,10 @@ translation services have become easily accessible for about 100
 languages, sign language is still an area that has not been explored. 
 Our goal is to detect \& translate the letters of \gls{asl} in real-time.
 \end{abstract}
+
+\keywords{\gls{asl}, fingerspelling, \gls{cnn}, transfer learning, 
+computer vision}
+
 
 \section{Introduction}
 
