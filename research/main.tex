@@ -103,10 +103,15 @@ Americans or 10,000,000 people suffered from hard of hearing and close to
 \bibliography{biblio}
 
 \listoffigures
+\listoftables
 
 \glsaddall
 \setlength{\glsdescwidth}{0.8\textwidth}
 \printglossary[type=\acronymtype,title=List Of Abbreviations]
+
+% (TODO: use a clearer way to separate)
+\clearpage
+\LARGE{\textbf{Additional Resources}}
 
 % (TODO: cite image to the website https://www.javatpoint.com/serialization-in-java)
 \begin{figure}[h]
@@ -161,6 +166,9 @@ Americans or 10,000,000 people suffered from hard of hearing and close to
 \caption{Process of testing the model}
 \end{figure}
 
+% (TODO: use a clearer way to separate)
+\clearpage
+
 \begin{table}[h]
 \begin{tabular}{ |l|c|c|c| }
   \hline
@@ -186,6 +194,9 @@ Americans or 10,000,000 people suffered from hard of hearing and close to
 \end{tabular}
 \caption{Trained model statistics using varying transfer learning models}
 \end{table}
+
+% (TODO: use a clearer way to separate)
+\clearpage
 
 \begin{table}[h]
 \begin{tabular}{ | @{\makebox[2em][r]{\rownumber\space}} |l|c| }
@@ -217,6 +228,41 @@ Americans or 10,000,000 people suffered from hard of hearing and close to
   \hline
 \end{tabular}
 \caption{Model architecture and number of parameters in each layer}
+\end{table}
+
+% (TODO: use a clearer way to separate)
+\clearpage
+
+\begin{table}[h]
+\begin{tabular}{ | @{\makebox[2em][r]{\rownumber\space}} |l|l| }
+  \hline
+  \multicolumn{1}{ | @{\makebox[2em][r]{\textbf{ ID }}} |l| }{\textbf{Layer (Type)}}
+  & \multicolumn{1}{ |c| }{\textbf{Number of Parameters}} \\ \hline
+  \texttt{(None, 8, 8, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
+  \texttt{(None, 8, 8, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
+  \texttt{(None, 8, 8, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
+  \texttt{(None, 8, 8, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
+  \texttt{(None, 16, 16, 128)} & \texttt{(None, 12, 12, 128)} \\ \hline
+  \texttt{(None, 13, 13, 64)} & \texttt{(None, 9, 9, 64)} \\ \hline
+  \texttt{(None, 10, 10, 64)} & \texttt{(None, 6, 6, 64)} \\ \hline
+  \texttt{(None, 20, 20, 64)} & \texttt{(None, 12, 12, 64)} \\ \hline
+  \texttt{(None, 17, 17, 64)} & \texttt{(None, 9, 9, 64)} \\ \hline
+  \texttt{(None, 14, 14, 64)} & \texttt{(None, 6, 6, 64)} \\ \hline
+  \texttt{(None, 14, 14, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
+  \texttt{(None, 14, 14, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
+  \texttt{(None, 14, 14, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
+  \texttt{(None, 14, 14, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
+  \texttt{(None, 14, 14, 2048)} & \texttt{(None, 6, 6, 2048)} \\ \hline
+  \texttt{(None, 14, 14, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
+  \texttt{(None, 14, 14, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
+  \texttt{(None, 14, 14, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
+  \texttt{(None, 14, 14, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
+  \texttt{(None, 7, 7, 128)} & \texttt{(None, 3, 3, 128)} \\ \hline
+  \texttt{(None, 6272)} & \texttt{(None, 1152)} \\ \hline
+  \texttt{(None, 24)} & \\
+  \hline
+\end{tabular}
+\caption{Shape of each layer in trained model for different transfer learning models}
 \end{table}
 
 \end{document}
