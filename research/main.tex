@@ -3,6 +3,8 @@
 \usepackage{titling}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
+\usepackage{array,etoolbox}
+\usepackage[justification=centering]{caption}
 \usepackage[acronym,nomain,nonumberlist,nogroupskip,nopostdot]{glossaries}
 
 % loads the list of abbreviations
@@ -19,6 +21,11 @@
   \small
   \noindent \textbf{\textit{Keywords ---}} #1
 }
+
+% counter for table
+\preto\tabular{\setcounter{magicrownumbers}{0}}
+\newcounter{magicrownumbers}
+\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
 
 
 \title{\gls{asl}\\
@@ -178,6 +185,38 @@ Americans or 10,000,000 people suffered from hard of hearing and close to
   \hline
 \end{tabular}
 \caption{Trained model statistics using varying transfer learning models}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{ | @{\makebox[2em][r]{\rownumber\space}} |l|c| }
+  \hline
+  \multicolumn{1}{ | @{\makebox[2em][r]{\textbf{ ID }}} |l| }{\textbf{Layer (Type)}} 
+  & \multicolumn{1}{ |c| }{\textbf{Number of Parameters}} \\ \hline
+  \texttt{dense\_1 (Dense)} & \emph{dependent} \\ \hline
+  \texttt{dense\_2 (Dense)} & 524,800 \\ \hline
+  \texttt{dense\_3 (Dense)} & 131,328 \\ \hline
+  \texttt{dense\_4 (Dense)} & 32,896 \\ \hline
+  \texttt{up\_sampling2d\_1 (UpSampling2D)} & 0 \\ \hline
+  \texttt{conv2d\_5 (Conv2D)} & 131,136 \\ \hline
+  \texttt{depthwise\_conv2d\_1 (DepthwiseConv2D)} & 1,088 \\ \hline
+  \texttt{up\_sampling2d\_2 (UpSampling2D)} & 0 \\ \hline
+  \texttt{depthwise\_conv2d\_2 (DepthwiseConv2D)} & 1,088 \\ \hline
+  \texttt{conv2d\_6 (Conv2D)} & 65,600 \\ \hline
+  \texttt{dense\_5 (Dense)} & 8,320 \\ \hline
+  \texttt{dense\_6 (Dense)} & 33,024 \\ \hline
+  \texttt{dense\_7 (Dense)} & 131,584 \\ \hline
+  \texttt{dense\_8 (Dense)} & 525,312 \\ \hline
+  \texttt{dense\_9 (Dense)} & 2,099,200 \\ \hline
+  \texttt{dense\_10 (Dense)} & 2,098,176 \\ \hline
+  \texttt{dense\_11 (Dense)} & 524,800 \\ \hline
+  \texttt{dense\_12 (Dense)} & 131,328 \\ \hline
+  \texttt{dense\_13 (Dense)} & 32,896 \\ \hline
+  \texttt{max\_pooling2d\_1 (MaxPooling2D)} & 0 \\ \hline
+  \texttt{flatten\_1 (Flatten)} & 0 \\ \hline
+  \texttt{dense\_14 (Dense)} & \emph{dependent} \\
+  \hline
+\end{tabular}
+\caption{Model architecture and number of parameters in each layer}
 \end{table}
 
 \end{document}
