@@ -55,13 +55,29 @@ computer vision}
 
 \subsection{Background}
 According to the \gls{csd} \cite{csd}, there are 360 million deaf people 
-worldwide. Another report by the \gls{who} [2] bumps up the number to 466 
+worldwide. Another report by the \gls{who} [2] TODO link bumps up the number to 466 
 million people suffering from disabling hearing loss. Future projections 
 estimate 630 million people by 2030 and over 900 million people by 2050. 
 But even in this age of technology and communication, we are yet to see a 
 universal translation system that helps bridge the gap between people that 
-can and cannot speak. The goal of this project is to detect and accurately 
-translate the letters in \gls{asl}.
+can and cannot speak. \gls{asl} is a natural language meaning it was not 
+created and was spread by the people who employ the signs by the movement of 
+hands, facial expressions, and body posture. The goal of this project is to 
+detect and accurately translate the letters in \gls{asl}.
+
+\subsection{Geographical Distribution}
+The true count for the number of sign languages is still unknown given the 
+vast majority, however, \textit{Ethnologue} \cite{ethnologue} lists this 
+number to be \textit{137} \cite{fenlon2015sign}. Given the vast majority, 
+\gls{asl} is still the most popular sign language and is being widely used 
+around the globe. In addition to being the primary source of communication for 
+a sign language in the United States, \gls{asl} is being used throughout most 
+of the provinces in Canada \cite{al2010sign}.
+
+Variations of \gls{asl} are also being used worldwide. Sign language 
+similar to \gls{asl} is being used throughout Africa in places such as 
+Nigeria, Ghana, Guyana, Central African Republic, Jamaica, Zimbabwe, and 
+Kenya \cite{nyst2010sign}.
 
 \subsection{Scope \& Limitations}
 % (TODO: do we want to add acronyms for US & UK?)
@@ -172,7 +188,7 @@ Americans or 10,000,000 people suffered from hard of hearing and close to
 \begin{table}[h]
 \begin{tabular}{ |l|c|c|c| }
   \hline
-  Model & Size & Accuracy & Parameters \\ \hline
+  \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
   MobileNetV2 & 14 MB & 0.713 & 3,538,984 \\ \hline
   InceptionV3 & 92 MB & 0.779 & 23,851,784 \\ \hline
   Xception & 88 MB & 0.790 & 22,910,480 \\ \hline
@@ -185,7 +201,7 @@ Americans or 10,000,000 people suffered from hard of hearing and close to
 \begin{table}[h]
 \begin{tabular}{ |l|c|c|c| }
   \hline
-  Model & Size & Accuracy & Parameters \\ \hline
+  \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
   MobileNetV2 & 91 MB & 0.918 & 7,934,872 \\ \hline
   InceptionV3 & 99 MB & 0.924 & 8,598,424 \\ \hline
   Xception & 100 MB & 0.908 & 8,721,304 \\ \hline
