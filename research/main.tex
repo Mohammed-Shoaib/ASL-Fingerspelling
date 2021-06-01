@@ -2,6 +2,7 @@
 \usepackage{url}
 \usepackage{titling}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{array,etoolbox}
 \usepackage[none]{hyphenat}
@@ -66,13 +67,15 @@ created and was spread by the people who employ the signs by the movement of
 hands, facial expressions, and body posture. The goal of this project is to 
 detect and accurately translate the letters in \gls{asl}.
 
-\subsection{Geographical Distribution}
-
+% (TODO: cite image to the website https://qualityansweringservice.com/american-sign-language-guide/)
 \begin{figure}[h]
-  \centering
-  \includegraphics[width=8cm]{./figures/asl being used around the world}
-  \caption{ASL being used around the world}
-  \end{figure}
+\centering
+\includegraphics[width=8cm]{./figures/asl alphabets}
+\caption{Alphabets in \gls{asl}}
+\label{asl alphabets}
+\end{figure}
+
+\subsection{Geographical Distribution}
 
 The true count for the number of sign languages is still unknown given the 
 vast majority, however, \textit{Ethnologue} \cite{ethnologue} lists this 
@@ -82,20 +85,36 @@ around the globe. In addition to being the primary source of communication for
 a sign language in the United States, \gls{asl} is being used throughout most 
 of the provinces in Canada \cite{al2010sign}.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/asl being used around the world}
+\caption{ASL being used around the world}
+\end{figure}
+
 Variations of \gls{asl} are also being used worldwide. Sign language 
 similar to \gls{asl} is being used throughout Africa in places such as 
 Nigeria, Ghana, Guyana, Central African Republic, Jamaica, Zimbabwe, and 
 Kenya \cite{nyst2010sign}.
 
 \subsection{Scope \& Limitations}
+
 % (TODO: do we want to add acronyms for US & UK?)
 The bottom line is that there is no universal sign language. For instance, the 
-\gls{bsl} differs by a great margin from the \gls{asl}. Generally speaking, a 
-person in the US can understand spoken English in the UK but this is not the 
-case with sign language. Even though there is a multitude of sign languages being used across the 
-world, if an accurate model was developed to recognize a sign language, in 
-our case, \gls{asl}, the same methodology could be applied to recognize other 
-sign languages.
+\gls{bsl} differs by a great margin from \gls{asl}, this is clear when 
+comparing \autoref{asl alphabets} with \autoref{bsl alphabets}. Generally 
+speaking, a person in the US can understand spoken English in the UK but this 
+is not the case with sign language. Even though there is a multitude of sign 
+languages being used across the world, if an accurate model was developed to 
+recognize a sign language, in our case, \gls{asl}, the same methodology could 
+be applied to recognize other sign languages.
+
+% (TODO: cite image to the website https://universeofmemory.com/british-sign-language-resources/)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/bsl alphabets}
+\caption{Alphabets in \gls{bsl}}
+\label{bsl alphabets}
+\end{figure}
 
 One big limitation for classification is that most signs require motion and 
 are not static. Even more so as there are signs which are formed by the same 
