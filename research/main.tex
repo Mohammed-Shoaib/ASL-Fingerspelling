@@ -185,6 +185,35 @@ needs to sign a letter.
 \caption{Cyberglove and Flock of Birds by Ascension}
 \end{figure}
 
+Due to the sophisticated components required by using sensor gloves, there's 
+been lots of research on translating ASL by using depth cameras. In 2015, we 
+had a major breakthrough successfully translating the 24 static \gls{asl} 
+alphabet signs using a Microsoft Kinect \cite{dong2015american}. A latex 
+color glove allowed for easier hand segmentation and localizing the joint 
+positions. The prediction was done through a \gls{rf} classifier on the depth 
+data. The Kinect has also been used in conjunction with hidden Markov 
+models \cite{lang2012sign} for recognition. Even with good results, the Kinect 
+is not something people just carry around. Furthermore, depth cameras are also 
+known to perform badly under poor lighting conditions.
+
+% (TODO: cite image to the reference \cite{dong2015american}
+% paper https://openaccess.thecvf.com/content_cvpr_workshops_2015/W15/papers/Dong_American_Sign_Language_2015_CVPR_paper.pdf)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/color glove}
+\caption{A color glove allowed easier hand segmentation}
+\end{figure}
+
+In 2015, a hand gesture recognition model was developed using depth and 
+intensity channels with 3D \gls{cnn} \cite{molchanov2015hand}. A similar 
+methodology was used to recognize sign language by extracting spatio-temporal 
+features \cite{huang2015sign}. To improve the performance, multi-channels of 
+video streams including color, depth, and body joint information are used as 
+input to the 3D \gls{cnn}. In 2017, a features extractor with deep behavior 
+was used to deal with the Arabic Sign Language \cite{elbadawy2017arabic}. By 
+combining the features extractor with a 3D \gls{cnn}, the recognition system 
+was fed with data from depth maps and could recognize 25 gestures.
+
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
 
