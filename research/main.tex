@@ -157,6 +157,34 @@ In terms of the distribution of people suffering from hearing loss \cite{who},
 432 million people are adults and 34 million are children. Future projections 
 estimate 630 million people by 2030 and over 900 million people by 2050.
 
+\subsection{Existing Models}
+
+There has been ongoing research in this area with the growth in machine 
+learning and datasets being made available publicly. Many of the models use 
+Kinect to recognize the hand gestures and map them to \gls{asl}.
+
+Earlier versions of work used a sensory glove. In 2005, Cemil and Ming 
+\cite{oz2005recognition} worked on recognizing the alphabets in \gls{asl} by 
+using a sensory Cyberglove and a motion tracker to extract the gestures. By 
+processing the data of the fingers on the strain gauges, the trajectory, and 
+orientation from the motion tracker through an \gls{ann}, high accuracy 
+results were achieved. Building upon this in 2011, Cemil and Ming 
+\cite{oz2011american} used feature extraction with noise reduction and were 
+able to classify 50 ASL words. A similar approach was used in 2014 
+\cite{patil2014american} where the output of the sensor glove gets sent to a 
+microcontroller through an \gls{adc}. The glove uses flex sensors which 
+capture the bending of each finger. The predicted letter gets displayed on an 
+LCD. Although this worked well, it is impractical in real-life. The whole 
+system requires several high components to be connected each time someone 
+needs to sign a letter.
+
+% (TODO: cite image to the website http://www.cyberglovesystems.com/)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/cyberglove and flock of birds}
+\caption{Cyberglove and Flock of Birds by Ascension}
+\end{figure}
+
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
 
