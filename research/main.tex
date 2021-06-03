@@ -236,6 +236,44 @@ models, namely, MobileNetV2 \cite{sandler2018mobilenetv2},
 Xception \cite{chollet2017xception}, Inceptionv3 \cite{szegedy2016rethinking}, 
 and Inception-ResNetv2 \cite{szegedy2017inception}, we achieve a high accuracy.
 
+\section{Problem Description}
+
+\subsection{Data Gathering}
+
+Looking for available datasets, the \textit{\gls{asl} Finger Spelling Dataset} 
+\cite{pugeault2011spelling} is perhaps the most popular one. There were others 
+too, but they did pose a few problems. There were many outliers present in the 
+dataset including the faces of the subjects. This causes difficulties while 
+training the model since our focus is the hand. The other datasets which focus 
+on the hand contain less outliers but do not contain a lot of variation 
+causing the model to overfit. Hence, we decided to create our own dataset 
+fixing the aforementioned problems by focusing on the hand and adding 
+variation by using more subjects in different locations.
+
+% (TODO: cite image to the reference \cite{pugeault2011spelling}
+% paper https://openaccess.thecvf.com/content_cvpr_workshops_2015/W15/papers/Dong_American_Sign_Language_2015_CVPR_paper.pdf)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/outliers in asl}
+\caption{Outliers present in \gls{asl} Fingerspelling dataset \cite{pugeault2011spelling}}
+\end{figure}
+
+Using \texttt{python}, a helper script was created to generate data to train 
+the model and has the following features:
+\begin{itemize}
+  \item Subjects: 5 different people with varying skin colors and features
+  \item Shape: [250×250×3] having reasonable parameters for the input image
+  \item Variability: taken with both good \& bad lighting
+  \item Size: 4,000 images for each alphabet for a total 96,000 images
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/asl fingerspelling}
+\caption{ASL alphabets from our dataset}
+\end{figure}
+
+
 
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
