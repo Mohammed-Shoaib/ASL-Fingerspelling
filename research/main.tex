@@ -214,6 +214,29 @@ was used to deal with the Arabic Sign Language \cite{elbadawy2017arabic}. By
 combining the features extractor with a 3D \gls{cnn}, the recognition system 
 was fed with data from depth maps and could recognize 25 gestures.
 
+% (TODO: cite image to the reference paper "Explaining hyperspectral imaging based plant disease identification: 3D CNN and saliency maps"
+% paper https://www.researchgate.net/publication/324744613_Explaining_hyperspectral_imaging_based_plant_disease_identification_3D_CNN_and_saliency_maps)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/3d cnn}
+\caption{3D Convolutional Neural Network}
+\end{figure}
+
+In 2018 a different solution was proposed, SignFi \cite{ma2018signfi} which 
+uses Wi-Fi to recognize sign language. SignFi can recognize 276 gestures 
+involving the head, arm, hand, and finger gestures with high accuracy. SignFi 
+works based on \gls{csi} which describes how a signal propagates from the 
+transmitter to the receiver at a certain carrier frequency. SignFi uses Wi-Fi 
+packets as input and a 9-layer \gls{cnn} as the classification algorithm.
+
+Realizing the challenges faced by the above mentioned methods, our goal is to 
+create a machine learning model with transfer learning to classify the 
+alphabets of \gls{asl} in real-time. By using \textit{four} transfer learning 
+models, namely, MobileNetV2 \cite{sandler2018mobilenetv2}, 
+Xception \cite{chollet2017xception}, Inceptionv3 \cite{szegedy2016rethinking}, 
+and Inception-ResNetv2 \cite{szegedy2017inception}, we achieve a high accuracy.
+
+
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
 
