@@ -29,6 +29,11 @@
 \newcounter{magicrownumbers}
 \newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
 
+% use an alias for the model names
+\newcommand{\mobilenet}{MobileNetV2}
+\newcommand{\xception}{Xception}
+\newcommand{\inception}{InceptionV3}
+\newcommand{\resnet}{InceptionResNetV2}
 
 \title{\gls{asl}\\
 	Fingerspelling Detection}
@@ -232,9 +237,9 @@ packets as input and a 9-layer \gls{cnn} as the classification algorithm.
 Realizing the challenges faced by the above mentioned methods, our goal is to 
 create a machine learning model with transfer learning to classify the 
 alphabets of \gls{asl} in real-time. By using \textit{four} transfer learning 
-models, namely, MobileNetV2 \cite{sandler2018mobilenetv2}, 
-Xception \cite{chollet2017xception}, Inceptionv3 \cite{szegedy2016rethinking}, 
-and Inception-ResNetv2 \cite{szegedy2017inception}, we achieve a high accuracy.
+models, namely, \mobilenet \cite{sandler2018mobilenetv2}, 
+\xception \cite{chollet2017xception}, \inception \cite{szegedy2016rethinking}, 
+and \resnet \cite{szegedy2017inception}, we achieve a high accuracy.
 
 \section{Problem Description}
 
@@ -342,6 +347,60 @@ There are certain parameters that can be tweaked by the user to fit to his needs
   \item Batch Size: number of training samples used in one iteration, \textit{default = 128}.
 \end{itemize}
 
+\subsection{Transfer Learning}
+
+We have used transfer learning to get a foundation for the model 
+configuration. Transfer learning makes use of knowledge gained while solving 
+one problem and applying it to a different but related problem. It is a 
+popular approach in deep learning as it provides a strong foundation and a 
+starting point given the vast amount of time and resources required to solve 
+the related problem from scratch. In our case, we will use transfer learning 
+models that have been trained to recognize patterns in images. As we are 
+focusing on fingerspelling \gls{asl}, we do not require motion (since we 
+exclude \textit{J \& Z} making it a related problem of finding patterns.
+
+% (TODO: cite image to the website https://medium.datadriveninvestor.com/introducing-transfer-learning-as-your-next-engine-to-drive-future-innovations-5e81a15bb567)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/training from scratch vs. transfer learning}
+\caption{Training from scratch vs. transfer learning}
+\end{figure}
+
+The \texttt{python} framework \texttt{keras} has many available models to 
+choose, we have made available the following:
+\begin{itemize}
+  \item \mobilenet: lightweight and fast model that runs on a smartphone
+  \cite{sandler2018mobilenetv2}
+  \item \xception: deep \gls{cnn} with depth-wise separable convolutions
+  \cite{chollet2017xception}
+  \item \inception: refined from GoogLeNet with batch normalization and 
+  factorization \cite{szegedy2016rethinking}
+  \item \resnet: variation of \inception by adding residual connections and a 
+  simplified architecture \cite{szegedy2017inception}
+\end{itemize}
+
+These were chosen carefully due to their ability to perform well on images and 
+computer vision related tasks.
+
+% (TODO: cite image to the website https://medium.com/@lorenzofamiglini/transfer-learning-with-deep-learning-machine-learning-techniques-b4052befe7e2)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/transfer learning process}
+\caption{Transfer learning process}
+\end{figure}
+
+We pass the image as input to our transfer learning which is well-trained to 
+figure out \textit{patterns}. The last layer in each transfer learning model 
+is used to get the model’s prediction of the category/label. We will be using 
+the 2\textsuperscript{nd} last layer which contains the activations of the 
+transfer learning model.
+
+Getting the activations of the transfer learning model takes time, hence, we 
+store the model's activations on the entire dataset by using the technique of 
+serialization as mentioned previously. These can be huge and consume memory, 
+if space is an issue, then it’s better to compromise with longer training 
+times.
+
 
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
@@ -361,20 +420,6 @@ There are certain parameters that can be tweaked by the user to fit to his needs
 \centering
 \includegraphics[width=8cm]{./figures/alphabets}
 \caption{ASL alphabets from our dataset}
-\end{figure}
-
-% (TODO: cite image to the website https://medium.datadriveninvestor.com/introducing-transfer-learning-as-your-next-engine-to-drive-future-innovations-5e81a15bb567)
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/training from scratch vs. transfer learning}
-\caption{Training from scratch vs. transfer learning}
-\end{figure}
-
-% (TODO: cite image to the website https://medium.com/@lorenzofamiglini/transfer-learning-with-deep-learning-machine-learning-techniques-b4052befe7e2)
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/transfer learning process}
-\caption{Transfer learning process}
 \end{figure}
 
 % (TODO: cite image to the website https://www.quora.com/What-is-the-benefit-of-using-average-pooling-rather-than-max-pooling)
@@ -410,10 +455,10 @@ There are certain parameters that can be tweaked by the user to fit to his needs
 \begin{tabular}{ |l|c|c|c| }
   \hline
   \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
-  MobileNetV2 & 14 MB & 0.713 & 3,538,984 \\ \hline
-  InceptionV3 & 92 MB & 0.779 & 23,851,784 \\ \hline
-  Xception & 88 MB & 0.790 & 22,910,480 \\ \hline
-  InceptionResNetV2 & 215 MB & 0.803 & 55,873,736 \\
+  \mobilenet & 14 MB & 0.713 & 3,538,984 \\ \hline
+  \inception & 92 MB & 0.779 & 23,851,784 \\ \hline
+  \xception & 88 MB & 0.790 & 22,910,480 \\ \hline
+  \resnet & 215 MB & 0.803 & 55,873,736 \\
   \hline
 \end{tabular}
 \caption{Transfer learning model statistics}
@@ -423,10 +468,10 @@ There are certain parameters that can be tweaked by the user to fit to his needs
 \begin{tabular}{ |l|c|c|c| }
   \hline
   \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
-  MobileNetV2 & 91 MB & 0.918 & 7,934,872 \\ \hline
-  InceptionV3 & 99 MB & 0.924 & 8,598,424 \\ \hline
-  Xception & 100 MB & 0.908 & 8,721,304 \\ \hline
-  InceptionResNetV2 & 93 MB & 0.848 & 8,074,136 \\
+  \mobilenet & 91 MB & 0.918 & 7,934,872 \\ \hline
+  \inception & 99 MB & 0.924 & 8,598,424 \\ \hline
+  \xception & 100 MB & 0.908 & 8,721,304 \\ \hline
+  \resnet & 93 MB & 0.848 & 8,074,136 \\
   \hline
 \end{tabular}
 \caption{Trained model statistics using varying transfer learning models}
