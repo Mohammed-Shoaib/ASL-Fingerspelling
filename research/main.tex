@@ -289,6 +289,49 @@ We have used the following dependencies:
 All the codebase is written in the \texttt{python} programming language due to 
 its wide support for machine learning algorithms with many different packages.
 
+\subsection{Data Preparation}
+
+% (TODO: this is a bit irrelevant and can be removed)
+The first step is to define the labels which in our case is a set of
+categorical labels. A helper script was created to accomplish just this task 
+alone, given a string representing a set of labels it creates a 
+\texttt{mapping.json} file with each label representing a numeric value. Due 
+to the amount of data being processed for the model, it takes time to load and 
+pre-process all of it. We can speed things up by using a common technique 
+called \textit{serialization}. Serialization is the process of converting an 
+object into a stream of bytes and saving that in the binary format in memory. 
+When required, we can load this stream of bytes back as our object, this 
+process is called \textit{deserialization}. Serialization allows us to have 
+faster training as preprocessing the dataset on each run can take time. In 
+\texttt{python}, serialization is commonly referred to as \textit{pickling}.
+
+% (TODO: cite image to the website https://www.javatpoint.com/serialization-in-java)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/serialization and deserialization}
+\caption{Process of serialization \& deserialization}
+\end{figure}
+
+The preprocessing phase consists of 3 parts:
+\begin{enumerate}
+  \item Load the data – We load the \texttt{xs} which is a list of images each 
+  representing the pixel values in RGB format and the \texttt{ys} which is a 
+  list of labels each representing the alphabet. We can load the images using 
+  OpenCV which is a popular computer vision library.
+  \item Preprocess the data – The input image size may not match the size 
+  required as input for the model. We resize all the images to the shape 
+  \texttt{[SHAPE × SHAPE × CHANNELS]} where the constants are collected from a 
+  configuration file, it is also a good idea to one-hot encode the labels. 
+  Lastly, it is recommended to shuffle the data since in the case of the data 
+  being organized together, it may hinder the learning process of the model 
+  during training.
+  \item Split the data – We need to divide the data into train and test sets. 
+  There is a common split called the \textit{80/20 split} which is derived 
+  from the Pareto principle. This means 80\% of the data or 76,800 images are 
+  used for the training set and the rest 20\% of the data or 19,200 images are 
+  used for the testing set.
+\end{enumerate}
+
 
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
@@ -303,13 +346,6 @@ its wide support for machine learning algorithms with many different packages.
 % (TODO: use a clearer way to separate)
 \clearpage
 \LARGE{\textbf{Additional Resources}}
-
-% (TODO: cite image to the website https://www.javatpoint.com/serialization-in-java)
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/serialization and deserialization}
-\caption{Process of serialization \& deserialization}
-\end{figure}
 
 \begin{figure}[h]
 \centering
