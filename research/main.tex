@@ -508,6 +508,40 @@ step:
 \caption{Process of testing the model}
 \end{figure}
 
+\subsection{Model Statistics}
+
+When we see the performance for the trained model, we see \inception 
+outperforms them all. This again can be explained by its very efficient 
+architecture which is unlike its predecessors. Peculiarly, \resnet which had 
+the best overall performance on the ImageNet dataset, has the worst 
+performance on our dataset. The reason for this is unclear, perhaps an 
+in-depth analysis of the weights can give a valid explanation. Due to the 
+small range of labels to classify, i.e., 24, \mobilenet performs very well as 
+its light-weight architecture can easily handle the small corpus of signs. 
+\xception also works well but its better to use \mobilenet due to its 
+computational advantage.
+
+\begin{table}[h]
+\begin{tabular}{ |l|c|c|c| }
+  \hline
+  \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
+  \mobilenet & 91 MB & 0.918 & 7,934,872 \\ \hline
+  \inception & 99 MB & 0.924 & 8,598,424 \\ \hline
+  \xception & 100 MB & 0.908 & 8,721,304 \\ \hline
+  \resnet & 93 MB & 0.848 & 8,074,136 \\
+  \hline
+\end{tabular}
+\caption{Trained model statistics using varying transfer learning models}
+\end{table}
+
+The overall performance of the model on the test dataset is \textbf{92.36\%} 
+which works well. The performance can further be improved by using the idea of 
+model ensembling which uses the results of the multiple models together to get 
+a combined prediction. This often works better than using an individual model 
+since each model has its own best-side or data that it can recognize well 
+leading to good performance.
+
+
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
 
@@ -542,32 +576,6 @@ step:
 
 % (TODO: use a clearer way to separate)
 \clearpage
-
-\begin{table}[h]
-\begin{tabular}{ |l|c|c|c| }
-  \hline
-  \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
-  \mobilenet & 14 MB & 0.713 & 3,538,984 \\ \hline
-  \inception & 92 MB & 0.779 & 23,851,784 \\ \hline
-  \xception & 88 MB & 0.790 & 22,910,480 \\ \hline
-  \resnet & 215 MB & 0.803 & 55,873,736 \\
-  \hline
-\end{tabular}
-\caption{Transfer learning model statistics}
-\end{table}
-
-\begin{table}[h]
-\begin{tabular}{ |l|c|c|c| }
-  \hline
-  \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
-  \mobilenet & 91 MB & 0.918 & 7,934,872 \\ \hline
-  \inception & 99 MB & 0.924 & 8,598,424 \\ \hline
-  \xception & 100 MB & 0.908 & 8,721,304 \\ \hline
-  \resnet & 93 MB & 0.848 & 8,074,136 \\
-  \hline
-\end{tabular}
-\caption{Trained model statistics using varying transfer learning models}
-\end{table}
 
 % (TODO: use a clearer way to separate)
 \clearpage
