@@ -541,6 +541,44 @@ a combined prediction. This often works better than using an individual model
 since each model has its own best-side or data that it can recognize well 
 leading to good performance.
 
+\subsection{Model Performance}
+
+The model was evaluated and tested on all 24 alphabets of \gls{asl}. From the 
+results shown in \autoref{asl abcdef} it is clear that the model performs 
+well. On further testing, it was found that specific signs such as the letter 
+\textit{F} are easily recognizable on the \inception or the letter \textit{U} 
+on the \xception model. This could just be due to the difference in the 
+architecture. \mobilenet works well overall and is fast when compared to the 
+other models. All the models work in real-time and work even better with good 
+lighting and clear backgrounds.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/asl abcdef}
+\caption{Prediction of the alphabets A, B, C, D, E, and F}
+\label{asl abcdef}
+\end{figure}
+
+But things are not always perfect as shown in \autoref{asl ddc}, some of the 
+letters in \gls{asl} are similar causing discrepancies and confusion when 
+given as input to the model. The distribution is shown below:
+\begin{itemize}
+  \item M, N, T
+  \item D, R, U
+  \item G, H
+  \item A, E, S
+  \item C, O, X
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/asl ddc}
+\caption{Incorrect prediction of R as D, U as D, and X as C}
+\label{asl ddc}
+\end{figure}
+
+Most of the time, the incorrect results fall in the similar categories due to the confusion caused by high similarities. Looking closely at the distribution of \texttt{{M, N, T}}, we see all of them just differ in the position of the thumb in between the other fingers. Again, the performance can be improved by adding more variability into the dataset and improving the training model architecture.
+
 
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
