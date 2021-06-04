@@ -401,6 +401,80 @@ serialization as mentioned previously. These can be huge and consume memory,
 if space is an issue, then it’s better to compromise with longer training 
 times.
 
+\subsection{Model Architecture}
+
+% (TODO: this can be removed as its relevant)
+Keras allows two ways to create models:
+\begin{itemize}
+  \item \textit{Sequential}: allows to create a layer-by-layer model where the 
+  inputs flow straight down to the output.
+  \item \textit{Functional}: connect a given layer to any other layer 
+  resulting in complex networks thus providing flexibility.
+\end{itemize}
+
+We use the \texttt{Sequential} model since we do not need to manually define 
+and connect each layer of our model.
+
+% (TODO: I don't think we should be explaining concepts in a research paper)
+Next, we need to define our layers. Each layer in our network tries to build 
+onto the work extracted from the previous layer. Layers extract useful 
+information from the data fed into them. The goal is to have meaningful 
+representations for our problem. Take a problem of recognizing parts of a 
+human face from a selfie. The first layer may extract the person from the 
+background. The second layer may extract parts of the human body from the 
+person such as the arms, legs, face and so on. The third layer may extract 
+parts of the face itself like the eyes, nose, mouth, hair and ears. The fourth 
+layer may extract more in-depth features such as the wrinkles, dark circles, 
+dimples and more. The activation function is used to decide which features are 
+relevant. Essentially, by deciding if a neuron fires (activates) or not, we 
+evaluate the importance of a feature in affecting the overall output.
+
+Working on large images can be a problem. For example, take a high-resolution 
+color image of width \texttt{1080 px} and height \texttt{720 px}. Since a 
+color image contains 3 channels (RGB), the total number of parameters is 
+\texttt{1080×720×3=2,332,800} parameters just for the input image alone! As we 
+keep adding more layers, the number of parameters goes on increasing. It is 
+recommended not to exceed 10 million parameters for the entire model as this 
+can have computation issues as well as other known issues like over-fitting.
+
+% (TODO: cite image to the website https://www.quora.com/What-is-the-benefit-of-using-average-pooling-rather-than-max-pooling)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/max pooling vs. average pooling}
+\caption{Max pooling vs. Average pooling}
+\end{figure}
+
+A resolve to decrease the number of parameters is a technique called pooling. 
+Pooling layers allow us to downsample our feature map by summarizing the 
+features. For image data, max pooling tends to work better because there could 
+be some extreme and important features (like edges) which get smoothened out 
+in average pooling. These two common pooling methods are described below: 
+\begin{itemize}
+  \item Average Pooling: replaces each patch by its average value.
+  \item Max Pooling: replaces each patch by its max value.
+\end{itemize}
+
+Before passing the output to the final layer which is a fully-connected layer, 
+it is a good idea to flatten this output. The flatten layer unrolls the input 
+to a single long one-dimensional array. Most of the work has been done at this 
+point by all the previous layers in our model allowing us to figure out the 
+patterns that are present. The work left now is to figure out the label, in 
+our case, the \gls{asl} alphabet. We use fully-connected layers to help link 
+the processed features together and predict the label.
+
+% (TODO: cite image to the website https://medium.com/analytics-vidhya/understanding-a-single-neurons-role-in-neural-network-77bb3251e9db)
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/softmax function}
+\caption{Softmax function pushing high scores close to 1 and low scores close to 0}
+\end{figure}
+
+The final layer in our model is also a fully-connected layer but it is 
+special. The number of units is the number of classes, in our case, 26. The 
+activation function used is softmax activation, it gives a probability 
+distribution wherein a value is pushed close to 1 if it is large or close to 0 
+if it is small.
+
 
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
@@ -420,20 +494,6 @@ times.
 \centering
 \includegraphics[width=8cm]{./figures/alphabets}
 \caption{ASL alphabets from our dataset}
-\end{figure}
-
-% (TODO: cite image to the website https://www.quora.com/What-is-the-benefit-of-using-average-pooling-rather-than-max-pooling)
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/max pooling vs. average pooling}
-\caption{Max pooling vs. Average pooling}
-\end{figure}
-
-% (TODO: cite image to the website https://medium.com/analytics-vidhya/understanding-a-single-neurons-role-in-neural-network-77bb3251e9db)
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/softmax function}
-\caption{Softmax function pushing high scores close to 1 and low scores close to 0}
 \end{figure}
 
 \begin{figure}[h]
