@@ -475,6 +475,22 @@ activation function used is softmax activation, it gives a probability
 distribution wherein a value is pushed close to 1 if it is large or close to 0 
 if it is small.
 
+\subsection{Train Phase}
+
+The training phase consists of four steps:
+\begin{enumerate}
+  \item Input: get \gls{roi} of shape \texttt{[250×250×3]} from image
+  \item Transfer learning: get the model activations from last layer
+  \item Train model: recognize \gls{asl} alphabet using previous activations
+  \item Repeat: process batches by resuming the training in each iteration
+\end{enumerate}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{./figures/train process}
+\caption{Process of training the model}
+\end{figure}
+
 
 \bibliographystyle{ieeetr}
 \bibliography{biblio}
