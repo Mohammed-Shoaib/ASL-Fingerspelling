@@ -20,8 +20,8 @@
 % keywords command
 \providecommand{\keywords}[1]
 {
-  \small
-  \noindent \textbf{\textit{Keywords ---}} #1
+	\small
+	\noindent \textbf{\textit{Keywords ---}} #1
 }
 
 % counter for table
@@ -35,17 +35,9 @@
 \newcommand{\inception}{InceptionV3}
 \newcommand{\resnet}{InceptionResNetV2}
 
-\title{\gls{asl}\\
-	Fingerspelling Detection}
-\author{Shoaib Mohammed}
-\date{01 June 2021}
-
 
 \begin{document}
 
-\begin{titlingpage}
-\maketitle
-\end{titlingpage}
 
 \begin{abstract}
 Approximately 70 million people around the world are deaf-mute. While 
@@ -266,10 +258,10 @@ variation by using more subjects in different locations.
 Using \texttt{python}, a helper script was created to generate data to train 
 the model and has the following features:
 \begin{itemize}
-  \item Subjects: 5 different people with varying skin colors and features
-  \item Shape: [250×250×3] having reasonable parameters for the input image
-  \item Variability: taken with both good \& bad lighting
-  \item Size: 4,000 images for each alphabet for a total 96,000 images
+	\item Subjects: 5 different people with varying skin colors and features
+	\item Shape: [250×250×3] having reasonable parameters for the input image
+	\item Variability: taken with both good \& bad lighting
+	\item Size: 4,000 images for each alphabet for a total 96,000 images
 \end{itemize}
 
 \begin{figure}[h]
@@ -284,11 +276,11 @@ the model and has the following features:
 % (TODO: add the actual version numbers)
 We have used the following dependencies:
 \begin{itemize}
-  \item \href{https://www.python.org/downloads/}{Python 3}
-  \item \href{https://www.scipy.org/install.html}{Numpy}
-  \item \href{https://keras.io/#installation}{Keras}
-  \item \href{https://github.com/Kaggle/kaggle-api}{Kaggle API}
-  \item \href{https://www.tensorflow.org/install}{TensorFlow}
+	\item \href{https://www.python.org/downloads/}{Python 3}
+	\item \href{https://www.scipy.org/install.html}{Numpy}
+	\item \href{https://keras.io/#installation}{Keras}
+	\item \href{https://github.com/Kaggle/kaggle-api}{Kaggle API}
+	\item \href{https://www.tensorflow.org/install}{TensorFlow}
 \end{itemize}
 
 All the codebase is written in the \texttt{python} programming language due to 
@@ -319,32 +311,32 @@ faster training as preprocessing the dataset on each run can take time. In
 
 The preprocessing phase consists of 3 parts:
 \begin{enumerate}
-  \item Load the data – We load the \texttt{xs} which is a list of images each 
-  representing the pixel values in RGB format and the \texttt{ys} which is a 
-  list of labels each representing the alphabet. We can load the images using 
-  OpenCV which is a popular computer vision library.
-  \item Preprocess the data – The input image size may not match the size 
-  required as input for the model. We resize all the images to the shape 
-  \texttt{[SHAPE × SHAPE × CHANNELS]} where the constants are collected from a 
-  configuration file, it is also a good idea to one-hot encode the labels. 
-  Lastly, it is recommended to shuffle the data since in the case of the data 
-  being organized together, it may hinder the learning process of the model 
-  during training.
-  \item Split the data – We need to divide the data into train and test sets. 
-  There is a common split called the \textit{80/20 split} which is derived 
-  from the Pareto principle. This means 80\% of the data or 76,800 images are 
-  used for the training set and the rest 20\% of the data or 19,200 images are 
-  used for the testing set.
+	\item Load the data – We load the \texttt{xs} which is a list of images each 
+	representing the pixel values in RGB format and the \texttt{ys} which is a 
+	list of labels each representing the alphabet. We can load the images using 
+	OpenCV which is a popular computer vision library.
+	\item Preprocess the data – The input image size may not match the size 
+	required as input for the model. We resize all the images to the shape 
+	\texttt{[SHAPE × SHAPE × CHANNELS]} where the constants are collected from a 
+	configuration file, it is also a good idea to one-hot encode the labels. 
+	Lastly, it is recommended to shuffle the data since in the case of the data 
+	being organized together, it may hinder the learning process of the model 
+	during training.
+	\item Split the data – We need to divide the data into train and test sets. 
+	There is a common split called the \textit{80/20 split} which is derived 
+	from the Pareto principle. This means 80\% of the data or 76,800 images are 
+	used for the training set and the rest 20\% of the data or 19,200 images are 
+	used for the testing set.
 \end{enumerate}
 
 \subsection{Configuration}
 
 There are certain parameters that can be tweaked by the user to fit to his needs:
 \begin{itemize}
-  \item Epochs: number of passes through the training set, \textit{default = 64}.
-  \item Shape: the shape of the square image, \textit{default = 250}.
-  \item Channels: number of color channels, \textit{default = 3}.
-  \item Batch Size: number of training samples used in one iteration, \textit{default = 128}.
+	\item Epochs: number of passes through the training set, \textit{default = 64}.
+	\item Shape: the shape of the square image, \textit{default = 250}.
+	\item Channels: number of color channels, \textit{default = 3}.
+	\item Batch Size: number of training samples used in one iteration, \textit{default = 128}.
 \end{itemize}
 
 \subsection{Transfer Learning}
@@ -369,14 +361,14 @@ exclude \textit{J \& Z} making it a related problem of finding patterns.
 The \texttt{python} framework \texttt{keras} has many available models to 
 choose, we have made available the following:
 \begin{itemize}
-  \item \mobilenet: lightweight and fast model that runs on a smartphone
-  \cite{sandler2018mobilenetv2}
-  \item \xception: deep \gls{cnn} with depth-wise separable convolutions
-  \cite{chollet2017xception}
-  \item \inception: refined from GoogLeNet with batch normalization and 
-  factorization \cite{szegedy2016rethinking}
-  \item \resnet: variation of \inception by adding residual connections and a 
-  simplified architecture \cite{szegedy2017inception}
+	\item \mobilenet: lightweight and fast model that runs on a smartphone
+	\cite{sandler2018mobilenetv2}
+	\item \xception: deep \gls{cnn} with depth-wise separable convolutions
+	\cite{chollet2017xception}
+	\item \inception: refined from GoogLeNet with batch normalization and 
+	factorization \cite{szegedy2016rethinking}
+	\item \resnet: variation of \inception by adding residual connections and a 
+	simplified architecture \cite{szegedy2017inception}
 \end{itemize}
 
 These were chosen carefully due to their ability to perform well on images and 
@@ -406,10 +398,10 @@ times.
 % (TODO: this can be removed as its relevant)
 Keras allows two ways to create models:
 \begin{itemize}
-  \item \textit{Sequential}: allows to create a layer-by-layer model where the 
-  inputs flow straight down to the output.
-  \item \textit{Functional}: connect a given layer to any other layer 
-  resulting in complex networks thus providing flexibility.
+	\item \textit{Sequential}: allows to create a layer-by-layer model where the 
+	inputs flow straight down to the output.
+	\item \textit{Functional}: connect a given layer to any other layer 
+	resulting in complex networks thus providing flexibility.
 \end{itemize}
 
 We use the \texttt{Sequential} model since we do not need to manually define 
@@ -450,8 +442,8 @@ features. For image data, max pooling tends to work better because there could
 be some extreme and important features (like edges) which get smoothened out 
 in average pooling. These two common pooling methods are described below: 
 \begin{itemize}
-  \item Average Pooling: replaces each patch by its average value.
-  \item Max Pooling: replaces each patch by its max value.
+	\item Average Pooling: replaces each patch by its average value.
+	\item Max Pooling: replaces each patch by its max value.
 \end{itemize}
 
 Before passing the output to the final layer which is a fully-connected layer, 
@@ -479,10 +471,10 @@ if it is small.
 
 The training phase consists of four steps:
 \begin{enumerate}
-  \item Input: get \gls{roi} of shape \texttt{[250×250×3]} from image
-  \item Transfer learning: get the model activations from last layer
-  \item Train model: recognize \gls{asl} alphabet using previous activations
-  \item Repeat: process batches by resuming the training in each iteration
+	\item Input: get \gls{roi} of shape \texttt{[250×250×3]} from image
+	\item Transfer learning: get the model activations from last layer
+	\item Train model: recognize \gls{asl} alphabet using previous activations
+	\item Repeat: process batches by resuming the training in each iteration
 \end{enumerate}
 
 \begin{figure}[h]
@@ -499,7 +491,7 @@ The training phase consists of four steps:
 The predict phase is exactly the same as the train phase except for the last 
 step:
 \begin{itemize}
-  \item Predict: display the alphabet with the highest score
+	\item Predict: display the alphabet with the highest score
 \end{itemize}
 
 \begin{figure}[h]
@@ -523,13 +515,13 @@ computational advantage.
 
 \begin{table}[h]
 \begin{tabular}{ |l|c|c|c| }
-  \hline
-  \textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
-  \mobilenet & 91 MB & 0.918 & 7,934,872 \\ \hline
-  \inception & 99 MB & 0.924 & 8,598,424 \\ \hline
-  \xception & 100 MB & 0.908 & 8,721,304 \\ \hline
-  \resnet & 93 MB & 0.848 & 8,074,136 \\
-  \hline
+	\hline
+	\textbf{Model} & \textbf{Size} & \textbf{Accuracy} & \textbf{Parameters} \\ \hline
+	\mobilenet & 91 MB & 0.918 & 7,934,872 \\ \hline
+	\inception & 99 MB & 0.924 & 8,598,424 \\ \hline
+	\xception & 100 MB & 0.908 & 8,721,304 \\ \hline
+	\resnet & 93 MB & 0.848 & 8,074,136 \\
+	\hline
 \end{tabular}
 \caption{Trained model statistics using varying transfer learning models}
 \end{table}
@@ -563,11 +555,11 @@ But things are not always perfect as shown in \autoref{asl ddc}, some of the
 letters in \gls{asl} are similar causing discrepancies and confusion when 
 given as input to the model. The distribution is shown below:
 \begin{itemize}
-  \item M, N, T
-  \item D, R, U
-  \item G, H
-  \item A, E, S
-  \item C, O, X
+	\item M, N, T
+	\item D, R, U
+	\item G, H
+	\item A, E, S
+	\item C, O, X
 \end{itemize}
 
 \begin{figure}[h]
@@ -589,10 +581,10 @@ without the need of sophisticated components or expensive hardware. In
 conclusion:
 
 \begin{itemize}
-  \item 466,000 people have disabling hearing loss.
-  \item Achieved a high accuracy of \textbf{92.36\%} on the test dataset.
-  \item Successfully fingerspell the 24 static alphabets of \gls{asl}.
-  \item Provide four transfer learning models for user flexibility.
+	\item 466,000 people have disabling hearing loss.
+	\item Achieved a high accuracy of \textbf{92.36\%} on the test dataset.
+	\item Successfully fingerspell the 24 static alphabets of \gls{asl}.
+	\item Provide four transfer learning models for user flexibility.
 \end{itemize}
 
 Most importantly, the model is fast, and it runs on your smartphone in 
@@ -604,21 +596,21 @@ breaking the communication barrier.
 A couple of approaches could be used to increase the performance of the model:
 
 \begin{itemize}
-  \item Model Ensembling: use results of multiple models to output the 
-  predicted letter.
-  \item Tree Algorithms: random forest works well for classification tasks.
-  \item Hidden Markov: a statistical model which learns by observing.
+	\item Model Ensembling: use results of multiple models to output the 
+	predicted letter.
+	\item Tree Algorithms: random forest works well for classification tasks.
+	\item Hidden Markov: a statistical model which learns by observing.
 \end{itemize}
 
 Our recommendations:
 
 \begin{itemize}
-  \item Number of categories: increase the corpus of signs being classified 
-  from 24 alphabets to words and gestures.
-  \item Software: integrate model into mobile, web, and desktop app allowing 
-  it to be more wide-spread and distributed.
-  \item Motion: classify more than just static signs and build over to dynamic 
-  signs requiring motion.
+	\item Number of categories: increase the corpus of signs being classified 
+	from 24 alphabets to words and gestures.
+	\item Software: integrate model into mobile, web, and desktop app allowing 
+	it to be more wide-spread and distributed.
+	\item Motion: classify more than just static signs and build over to dynamic 
+	signs requiring motion.
 \end{itemize}
 
 
@@ -662,32 +654,32 @@ Our recommendations:
 
 \begin{table}[h]
 \begin{tabular}{ | @{\makebox[2em][r]{\rownumber\space}} |l|c| }
-  \hline
-  \multicolumn{1}{ | @{\makebox[2em][r]{\textbf{ ID }}} |l| }{\textbf{Layer (Type)}} 
-  & \multicolumn{1}{ |c| }{\textbf{Number of Parameters}} \\ \hline
-  \texttt{dense\_1 (Dense)} & \emph{dependent} \\ \hline
-  \texttt{dense\_2 (Dense)} & 524,800 \\ \hline
-  \texttt{dense\_3 (Dense)} & 131,328 \\ \hline
-  \texttt{dense\_4 (Dense)} & 32,896 \\ \hline
-  \texttt{up\_sampling2d\_1 (UpSampling2D)} & 0 \\ \hline
-  \texttt{conv2d\_5 (Conv2D)} & 131,136 \\ \hline
-  \texttt{depthwise\_conv2d\_1 (DepthwiseConv2D)} & 1,088 \\ \hline
-  \texttt{up\_sampling2d\_2 (UpSampling2D)} & 0 \\ \hline
-  \texttt{depthwise\_conv2d\_2 (DepthwiseConv2D)} & 1,088 \\ \hline
-  \texttt{conv2d\_6 (Conv2D)} & 65,600 \\ \hline
-  \texttt{dense\_5 (Dense)} & 8,320 \\ \hline
-  \texttt{dense\_6 (Dense)} & 33,024 \\ \hline
-  \texttt{dense\_7 (Dense)} & 131,584 \\ \hline
-  \texttt{dense\_8 (Dense)} & 525,312 \\ \hline
-  \texttt{dense\_9 (Dense)} & 2,099,200 \\ \hline
-  \texttt{dense\_10 (Dense)} & 2,098,176 \\ \hline
-  \texttt{dense\_11 (Dense)} & 524,800 \\ \hline
-  \texttt{dense\_12 (Dense)} & 131,328 \\ \hline
-  \texttt{dense\_13 (Dense)} & 32,896 \\ \hline
-  \texttt{max\_pooling2d\_1 (MaxPooling2D)} & 0 \\ \hline
-  \texttt{flatten\_1 (Flatten)} & 0 \\ \hline
-  \texttt{dense\_14 (Dense)} & \emph{dependent} \\
-  \hline
+	\hline
+	\multicolumn{1}{ | @{\makebox[2em][r]{\textbf{ ID }}} |l| }{\textbf{Layer (Type)}} 
+	& \multicolumn{1}{ |c| }{\textbf{Number of Parameters}} \\ \hline
+	\texttt{dense\_1 (Dense)} & \emph{dependent} \\ \hline
+	\texttt{dense\_2 (Dense)} & 524,800 \\ \hline
+	\texttt{dense\_3 (Dense)} & 131,328 \\ \hline
+	\texttt{dense\_4 (Dense)} & 32,896 \\ \hline
+	\texttt{up\_sampling2d\_1 (UpSampling2D)} & 0 \\ \hline
+	\texttt{conv2d\_5 (Conv2D)} & 131,136 \\ \hline
+	\texttt{depthwise\_conv2d\_1 (DepthwiseConv2D)} & 1,088 \\ \hline
+	\texttt{up\_sampling2d\_2 (UpSampling2D)} & 0 \\ \hline
+	\texttt{depthwise\_conv2d\_2 (DepthwiseConv2D)} & 1,088 \\ \hline
+	\texttt{conv2d\_6 (Conv2D)} & 65,600 \\ \hline
+	\texttt{dense\_5 (Dense)} & 8,320 \\ \hline
+	\texttt{dense\_6 (Dense)} & 33,024 \\ \hline
+	\texttt{dense\_7 (Dense)} & 131,584 \\ \hline
+	\texttt{dense\_8 (Dense)} & 525,312 \\ \hline
+	\texttt{dense\_9 (Dense)} & 2,099,200 \\ \hline
+	\texttt{dense\_10 (Dense)} & 2,098,176 \\ \hline
+	\texttt{dense\_11 (Dense)} & 524,800 \\ \hline
+	\texttt{dense\_12 (Dense)} & 131,328 \\ \hline
+	\texttt{dense\_13 (Dense)} & 32,896 \\ \hline
+	\texttt{max\_pooling2d\_1 (MaxPooling2D)} & 0 \\ \hline
+	\texttt{flatten\_1 (Flatten)} & 0 \\ \hline
+	\texttt{dense\_14 (Dense)} & \emph{dependent} \\
+	\hline
 \end{tabular}
 \caption{Model architecture and number of parameters in each layer}
 \end{table}
@@ -697,32 +689,32 @@ Our recommendations:
 
 \begin{table}[h]
 \begin{tabular}{ | @{\makebox[2em][r]{\rownumber\space}} |l|l| }
-  \hline
-  \multicolumn{1}{ | @{\makebox[2em][r]{\textbf{ ID }}} |l| }{\textbf{Layer (Type)}}
-  & \multicolumn{1}{ |c| }{\textbf{Number of Parameters}} \\ \hline
-  \texttt{(None, 8, 8, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
-  \texttt{(None, 8, 8, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
-  \texttt{(None, 8, 8, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
-  \texttt{(None, 8, 8, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
-  \texttt{(None, 16, 16, 128)} & \texttt{(None, 12, 12, 128)} \\ \hline
-  \texttt{(None, 13, 13, 64)} & \texttt{(None, 9, 9, 64)} \\ \hline
-  \texttt{(None, 10, 10, 64)} & \texttt{(None, 6, 6, 64)} \\ \hline
-  \texttt{(None, 20, 20, 64)} & \texttt{(None, 12, 12, 64)} \\ \hline
-  \texttt{(None, 17, 17, 64)} & \texttt{(None, 9, 9, 64)} \\ \hline
-  \texttt{(None, 14, 14, 64)} & \texttt{(None, 6, 6, 64)} \\ \hline
-  \texttt{(None, 14, 14, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
-  \texttt{(None, 14, 14, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
-  \texttt{(None, 14, 14, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
-  \texttt{(None, 14, 14, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
-  \texttt{(None, 14, 14, 2048)} & \texttt{(None, 6, 6, 2048)} \\ \hline
-  \texttt{(None, 14, 14, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
-  \texttt{(None, 14, 14, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
-  \texttt{(None, 14, 14, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
-  \texttt{(None, 14, 14, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
-  \texttt{(None, 7, 7, 128)} & \texttt{(None, 3, 3, 128)} \\ \hline
-  \texttt{(None, 6272)} & \texttt{(None, 1152)} \\ \hline
-  \texttt{(None, 24)} & \\
-  \hline
+	\hline
+	\multicolumn{1}{ | @{\makebox[2em][r]{\textbf{ ID }}} |l| }{\textbf{Layer (Type)}}
+	& \multicolumn{1}{ |c| }{\textbf{Number of Parameters}} \\ \hline
+	\texttt{(None, 8, 8, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
+	\texttt{(None, 8, 8, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
+	\texttt{(None, 8, 8, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
+	\texttt{(None, 8, 8, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
+	\texttt{(None, 16, 16, 128)} & \texttt{(None, 12, 12, 128)} \\ \hline
+	\texttt{(None, 13, 13, 64)} & \texttt{(None, 9, 9, 64)} \\ \hline
+	\texttt{(None, 10, 10, 64)} & \texttt{(None, 6, 6, 64)} \\ \hline
+	\texttt{(None, 20, 20, 64)} & \texttt{(None, 12, 12, 64)} \\ \hline
+	\texttt{(None, 17, 17, 64)} & \texttt{(None, 9, 9, 64)} \\ \hline
+	\texttt{(None, 14, 14, 64)} & \texttt{(None, 6, 6, 64)} \\ \hline
+	\texttt{(None, 14, 14, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
+	\texttt{(None, 14, 14, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
+	\texttt{(None, 14, 14, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
+	\texttt{(None, 14, 14, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
+	\texttt{(None, 14, 14, 2048)} & \texttt{(None, 6, 6, 2048)} \\ \hline
+	\texttt{(None, 14, 14, 1024)} & \texttt{(None, 6, 6, 1024)} \\ \hline
+	\texttt{(None, 14, 14, 512)} & \texttt{(None, 6, 6, 512)} \\ \hline
+	\texttt{(None, 14, 14, 256)} & \texttt{(None, 6, 6, 256)} \\ \hline
+	\texttt{(None, 14, 14, 128)} & \texttt{(None, 6, 6, 128)} \\ \hline
+	\texttt{(None, 7, 7, 128)} & \texttt{(None, 3, 3, 128)} \\ \hline
+	\texttt{(None, 6272)} & \texttt{(None, 1152)} \\ \hline
+	\texttt{(None, 24)} & \\
+	\hline
 \end{tabular}
 \caption{Shape of each layer in trained model for different transfer learning models}
 \end{table}
