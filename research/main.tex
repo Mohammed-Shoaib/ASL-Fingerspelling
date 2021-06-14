@@ -1,11 +1,13 @@
 \documentclass[twocolumn]{article}
 \usepackage{url}
+\usepackage{float}
 \usepackage{titling}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{array,etoolbox}
 \usepackage[none]{hyphenat}
+\usepackage[toc,page]{appendix}
 \usepackage[justification=centering]{caption}
 \usepackage[acronym,nomain,nonumberlist,nogroupskip,nopostdot]{glossaries}
 
@@ -633,35 +635,10 @@ Our recommendations:
 \setlength{\glsdescwidth}{0.8\textwidth}
 \printglossary[type=\acronymtype,title=List Of Abbreviations]
 
-% (TODO: use a clearer way to separate)
-\clearpage
-\LARGE{\textbf{Additional Resources}}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/alphabets}
-\caption{ASL alphabets from our dataset}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/train process}
-\caption{Process of training the model}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm]{./figures/predict process}
-\caption{Process of testing the model}
-\end{figure}
-
-% (TODO: use a clearer way to separate)
-\clearpage
-
-% (TODO: use a clearer way to separate)
-\clearpage
+\begin{appendices}
 
 \begin{table}[h]
+% \centering
 \begin{tabular}{ | @{\makebox[2em][r]{\rownumber\space}} |l|c| }
 	\hline
 	\multicolumn{1}{ | @{\makebox[2em][r]{\textbf{ ID }}} |l| }{\textbf{Layer (Type)}} 
@@ -727,5 +704,7 @@ Our recommendations:
 \end{tabular}
 \caption{Shape of each layer in trained model for different transfer learning models}
 \end{table}
+
+\end{appendices}
 
 \end{document}
